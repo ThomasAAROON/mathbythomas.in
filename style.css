@@ -1,0 +1,31 @@
+:root{--bg:#22160e;--card:#3a281b;--gold:#e8c880;--gold-d:#b88810;--cream:#faf4e8;--muted:#b8a68c;--green:#60d678}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--cream);font-family:'Noto Sans Tamil','Noto Sans',system-ui,sans-serif;line-height:1.65;font-size:17px}
+a{color:var(--gold)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header{border-top:6px solid var(--gold-d);padding:28px 0 8px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--cream)}
+.brand svg{flex:none}
+.brand b{font-size:22px;letter-spacing:.5px}
+nav{margin-top:10px;font-size:15px}
+nav a{margin-right:18px;text-decoration:none}
+.hero{padding:48px 0 28px}
+.hero h1{font-size:clamp(30px,6vw,46px);line-height:1.2;color:var(--gold)}
+.hero p{font-size:19px;margin-top:14px;color:var(--cream)}
+.tag{display:inline-block;margin-top:18px;border:1px solid var(--gold-d);color:var(--gold);padding:4px 14px;border-radius:20px;font-size:14px}
+section{padding:26px 0}
+h2{color:var(--gold);font-size:24px;margin-bottom:12px}
+h3{font-size:19px;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid #5a4330;border-radius:14px;padding:20px}
+.card p,.card li{color:var(--cream);font-size:16px}
+.ta{color:var(--muted);font-size:15px;margin-top:6px}
+ul{padding-left:20px}
+li{margin:4px 0}
+.contact .row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;background:var(--gold);color:#22160e;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:10px}
+.btn.alt{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.note{background:#2c1d12;border-left:4px solid var(--gold-d);padding:14px 16px;border-radius:6px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid #4a3626;margin-top:30px;padding:22px 0 40px;color:var(--muted);font-size:14px}
+.doc h2{margin-top:26px}
+.doc p,.doc li{margin-top:8px}
