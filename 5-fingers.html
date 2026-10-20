@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 Fingers — Math by Thomas</title>
+<meta name="description" content="5 Fingers — Machine Learning + Market Profile tool for Nifty 50 intraday. Fixed rules, live Telegram channel, weekly scorecards. Educational only.">
+<meta property="og:title" content="5 Fingers — Math by Thomas">
+<meta property="og:description" content="5 Fingers — Machine Learning + Market Profile tool for Nifty 50 intraday. Fixed rules, live Telegram channel, weekly scorecards. Educational only.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mathbythomas.in/5-fingers.html">
+<meta property="og:image" content="https://mathbythomas.in/scorecards/2026-10-12.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="index.html"><img src="logo.svg" width="46" height="46" alt=""><b>Math by Thomas</b></a>
+  <nav class="main"><a href="index.html">Home</a><a href="5-fingers.html" class=on>5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="index.html#contact">Contact</a></nav>
+</header>
+<main class="wrap">
+
+  <div class="hero">
+    <h1>5 Fingers</h1>
+    <p class="lead">Machine Learning + Market Profile for Nifty 50 intraday.</p>
+    <p class="ta">Nifty 50 intraday-க்கான Machine Learning + Market Profile கருவி.</p>
+  </div>
+
+  <section>
+    <h2>The idea</h2>
+    <div class="card">
+      <p>As the market makes new highs and lows in the first minutes of the day, the model asks one question: <b>is this likely to be the day's turning point?</b> It answers with a probability, not a yes or no. A signal comes only when that probability crosses a level fixed in advance.</p>
+      <p>The model learned from ten years of Nifty 50 1-minute data (2016–2026). It was tested walk-forward — each year was predicted using only earlier years — and then on data it had never seen.</p>
+      <p class="ta">புதிய உச்சம் / தாழ்வு வரும்போது "இதுதான் இன்றைய திருப்புமுனையா?" என்று model ஒரு சதவீத வாய்ப்பைக் கணக்கிடுகிறது. முன்பே நிர்ணயித்த எல்லையைத் தாண்டினால் மட்டுமே signal.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fixed rules</h2>
+    <ol class="steps">
+      <li><b>Market Profile filter.</b> If Nifty opens outside the previous day's value area, there is no 5 Fingers trade that day.</li>
+      <li><b>One trade a day.</b> At most one 5 Fingers trade per day — LONG from a low, SHORT from a high.</li>
+      <li><b>Stop loss fixed in advance,</b> and moved to the entry price (breakeven) once the trade is 30 points in profit.</li>
+      <li><b>Time exit at 14:50.</b> No discretion, no averaging, no re-entry.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>A trading day</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Time (IST)</th><th>What happens</th></tr>
+      <tr><td>~09:10</td><td>Morning message: previous-day value area, US market context, overnight global shocks</td></tr>
+      <tr><td>09:20</td><td>5 Fingers decision — trade or no trade</td></tr>
+      <tr><td>09:45</td><td>ORB 30 range (only in fear periods) <span class="badge">experimental</span></td></tr>
+      <tr><td>Europe open + 60 min</td><td>Europe risk-off check <span class="badge">experimental</span></td></tr>
+      <tr><td>14:50</td><td>Exit of all open trades</td></tr>
+      <tr><td>Friday</td><td>Weekly scorecard — every result, losses included</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>What you get</h2>
+    <div class="grid">
+      <div class="card"><h3>TradingView indicator</h3><p>"Math by Thomas - 5 Fingers" (invite-only) on one TradingView account. Entry, stop loss and levels on your Nifty 50 chart (1-min or 5-min).</p></div>
+      <div class="card"><h3>Telegram channel</h3><p>Live messages from our server: morning context, signals, stop updates and exits. This is the official record.</p></div>
+      <div class="card"><h3>Future updates</h3><p>All future versions at no extra cost.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Price</h2>
+    <div class="price">
+      <div class="amt">₹20,000 <small>one-time · lifetime access</small></div>
+      <ul style="margin-top:12px">
+        <li>Indicator + Telegram channel + future updates</li>
+        <li>Access within 24 hours (working days)</li>
+        <li><b>No refund</b> — please study the scorecards before you buy</li>
+      </ul>
+      <div class="cta"><a class="btn" href="https://wa.me/917904211337">WhatsApp to buy</a><a class="btn alt" href="policy.html">Read the sale policy</a></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Honest limits</h2>
+    <div class="note">
+      Machine learning gives a probability, not a promise. Many signals will lose. Some weeks and months will end in a loss. If market behaviour changes, the model can weaken — that is why every result is published and monitored. Tools marked experimental (PDH/PDL, ORB 30, Europe risk-off) are still being evaluated live.
+    </div>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <details><summary>Which chart should I use?</summary><p>Nifty 50 spot index (NSE:NIFTY), 1-minute or 5-minute. The indicator does not work on Bank Nifty, stocks, futures or options charts.</p></details>
+    <details><summary>TradingView and Telegram show different results. Which is correct?</summary><p>Telegram (our server) is the official record. TradingView data can differ by a few points, which can matter on borderline days.</p></details>
+    <details><summary>Do I need a paid TradingView plan?</summary><p>No. The indicator uses free data feeds by default.</p></details>
+    <details><summary>Will I surely make profit?</summary><p>No. Nobody can promise that. Losing trades will happen. Trade only with money you can afford to lose, and decide your own position size.</p></details>
+    <details><summary>Can I share my access?</summary><p>No. Access is for one person. Sharing leads to removal without refund.</p></details>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Call / WhatsApp Vijay, or message Thomas on Telegram.</p>
+    <p class="ta">விவரங்களுக்கு WhatsApp அல்லது Telegram-இல் தொடர்பு கொள்ளுங்கள்.</p>
+    <div class="cta">
+      <a class="btn" href="https://wa.me/917904211337">WhatsApp · +91 79042 11337</a>
+      <a class="btn alt" href="https://t.me/Math_Thomas">Telegram · @Math_Thomas</a>
+      <a class="btn alt" href="mailto:thomasaaroon@gmail.com">Email</a>
+    </div>
+  </section>
+
+</main>
+<footer class="wrap">
+  <nav><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+  <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
+  Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
+  <p class="disc">© 2026 Math by Thomas · India</p>
+</footer>
+</body>
+</html>
