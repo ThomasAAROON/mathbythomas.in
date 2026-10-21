@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Far OTM Options: விலை நகர்வின் முழு விளக்கம் — Math by Thomas</title>
+<meta name="description" content="Far OTM option premium ஏன் spot-க்கு எதிர் திசையிலும் ஏறுகிறது — delta, theta, vega, gamma, IV, short covering, OI. Math by Thomas Options கல்வி.">
+<meta property="og:title" content="Far OTM Options: விலை நகர்வின் முழு விளக்கம் — Math by Thomas">
+<meta property="og:description" content="Far OTM option premium ஏன் spot-க்கு எதிர் திசையிலும் ஏறுகிறது — delta, theta, vega, gamma, IV, short covering, OI. Math by Thomas Options கல்வி.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mathbythomas.in/far-otm-options.html">
+<meta property="og:image" content="https://mathbythomas.in/scorecard-2026-10-12.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="index.html"><img src="logo.svg" width="46" height="46" alt=""><b>Math by Thomas</b></a>
+  <nav class="main"><a href="index.html">Home</a><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="index.html#contact">Contact</a></nav>
+</header>
+<main class="wrap">
+<article class="doc">
+  <div class="hero" style="padding-bottom:0">
+    <p class="ta"><a href="articles.html">← Articles</a> · Options கல்வி</p>
+    <h1>Far OTM Options: விலை நகர்வின் முழு விளக்கம்</h1>
+    <p class="ta">Thomas Aaroon · 8 October 2026 · தமிழ்</p>
+  </div>
+<h2>கேள்வியும் பதிலும்</h2>
+<p>Far OTM option-ன் விலையை spot மட்டும் தீர்மானிப்பதில்லை. ஒரே நேரத்தில் பல சக்திகள் அதை எதிர் திசைகளில் இழுக்கின்றன. மேலே தள்ளும் சக்தி வலுவாக இருக்கும்போது, spot எதிர் திசையில் நகர்ந்தாலும் premium உயரும்.</p>
+<p>இந்த ஆவணத்தில் "எதிர் திசை" என்றால்:</p>
+<ul>
+<li><strong>Call option:</strong> spot கீழே போவது (downtrend)</li>
+<li><strong>Put option:</strong> spot மேலே போவது (uptrend)</li>
+</ul>
+<p>அடிப்படை உண்மை:</p>
+<ol>
+<li>Far OTM option-க்கு intrinsic value = 0.</li>
+<li>அதன் premium முழுவதும் time value + volatility value மட்டுமே.</li>
+<li>அதனால் spot-ஐ விட IV, நேரம், demand-supply ஆகியவை இதன் விலையை அதிகம் பாதிக்கும்.</li>
+</ol>
+<h2>Far OTM strike-ல் என்ன நடக்கிறது</h2>
+<p>Far OTM strike-ல் நடப்பது பெரும்பாலும் probability, IV, time decay ஆகியவற்றின் விளைவு. கீழே உள்ள எட்டு உண்மைகள் இந்தக் கட்டுரையின் அடிப்படை.</p>
+<ol>
+<li><strong>Premium அமைப்பு:</strong> Intrinsic value = 0. Premium = 100% time value + volatility value. Expiry-ல் spot strike-ஐத் தாண்டவில்லை என்றால் premium பூஜ்யம்.</li>
+<li><strong>Delta மிகக் குறைவு (0.01 – 0.10):</strong> Spot 100 points நகர்ந்தால் premium சில points மட்டுமே நகரும். Delta-வைத் தோராயமாக "expiry-ல் ITM ஆகும் வாய்ப்பு" என்று எடுக்கலாம் (0.05 = சுமார் 5%).</li>
+<li><strong>Theta:</strong> ₹ அளவில் சிறியது, ஆனால் premium-ன் சதவீதமாக மிக வேகமானது. கடைசி 2–3 நாட்களில் ₹5 premium ₹0.05 ஆவது சாதாரணம்.</li>
+<li><strong>Gamma வெடிப்பு:</strong> Spot தூரத்தில் இருக்கும்போது gamma கிட்டத்தட்ட பூஜ்யம். Expiry அருகில் spot வேகமாக strike நோக்கி நகர்ந்தால் premium 10x, 20x ஏறலாம். இது அரிது.</li>
+<li><strong>IV skew:</strong> Far OTM puts-க்கு பொதுவாக IV அதிகம். காரணம் crash-க்கு எதிரான hedge demand.</li>
+<li><strong>யார் இருக்கிறார்கள்:</strong> Buyers — retail (மலிவான premium), hedgers. Sellers — பெரிய capital; அடிக்கடி சிறிய லாபம், அரிதான பெரிய loss (tail risk).</li>
+<li><strong>Liquidity:</strong> Bid-ask spread அகலம். Premium ₹1–2 என்றால் ₹0.20 spread-கூட 10–20% cost.</li>
+<li><strong>Expected value:</strong> Buyer-க்கு வாய்ப்பு அரிது, payoff பெரியது. Seller-க்கு வாய்ப்பு அடிக்கடி, loss அரிது ஆனால் பெரியது. இரண்டையும் IV தீர்மானிக்கிறது.</li>
+</ol>
+<p><strong>Breakeven உதாரணம்:</strong> Nifty 25,000, weekly 25,800 CE, premium ₹3. Breakeven = 25,803. சில நாட்களில் சுமார் 3.2% move தேவை. அந்த move வரவில்லை என்றால் ₹3 முழுவதும் போய்விடும்.</p>
+<h2>Vega: IV மாற்றத்தின் விளைவு</h2>
+<p>Vega = IV 1 point மாறினால் premium எத்தனை rupees மாறும் என்பதைக் காட்டும் எண்.</p>
+<ol>
+<li><strong>அர்த்தம்:</strong> Vega 2 என்றால், IV +1 point → premium +₹2. IV −1 point → premium −₹2.</li>
+<li><strong>Call, Put இரண்டுக்கும் ஒரே திசை:</strong> IV ஏறினால் இரண்டும் ஏறும். IV இறங்கினால் இரண்டும் இறங்கும்.</li>
+<li><strong>எங்கே அதிகம்:</strong> ATM-ல் அதிகம். Far OTM, deep ITM-ல் குறைவு.</li>
+<li><strong>நேரம்:</strong> Expiry தூரம் அதிகம் → vega அதிகம் (monthly &gt; weekly). Expiry நெருங்க vega குறையும்.</li>
+<li><strong>Buyer / Seller:</strong> Buyer-க்கு IV ஏறுவது லாபம். Seller-க்கு IV இறங்குவது லாபம்.</li>
+<li><strong>உதாரணம்:</strong> Premium ₹50, vega 3, IV 15 → 18 (+3). மாற்றம் = 3 × 3 = +₹9. புதிய premium = ₹59 (spot நகர்வு தவிர).</li>
+<li><strong>IV crush:</strong> Event முடிந்ததும் IV திடீரென்று இறங்கும். Spot சரியான திசையில் நகர்ந்தாலும் buyer-க்கு premium குறையலாம்.</li>
+</ol>
+<p><strong>Nifty vega — தோராய மதிப்புகள்</strong> (Nifty சுமார் 25,000, IV சுமார் 12–14%, ஒரு unit-க்கு):</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Expiry-க்கு மீதி நாட்கள்</th>
+<th>ATM</th>
+<th>500 pts OTM</th>
+<th>1000 pts OTM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 நாள் (expiry day)</td>
+<td>~5</td>
+<td>~0.5</td>
+<td>~0</td>
+</tr>
+<tr>
+<td>7 நாள் (weekly)</td>
+<td>~14</td>
+<td>~7–8</td>
+<td>~1–2</td>
+</tr>
+<tr>
+<td>30 நாள் (monthly)</td>
+<td>~28–30</td>
+<td>~22</td>
+<td>~12</td>
+</tr>
+<tr>
+<td>90 நாள்</td>
+<td>~50</td>
+<td>~45</td>
+<td>~35</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lot-க்கான vega = இந்த மதிப்பு × lot size. துல்லிய மதிப்பு broker option chain-ன் Greeks column-ல் கிடைக்கும்.</p>
+<h2>Gamma: Delta மாறும் வேகம்</h2>
+<p>Gamma = spot 1 point நகர்ந்தால் delta எவ்வளவு மாறும் என்பதைக் காட்டும் எண்.</p>
+<ol>
+<li><strong>அர்த்தம்:</strong> Gamma 0.001 என்றால், spot 100 points நகர்ந்தால் delta 0.10 மாறும்.</li>
+<li><strong>Call, Put இரண்டுக்கும் positive:</strong> Buyer-க்கு gamma சாதகம் (லாபம் வேகமாக வளரும்). Seller-க்கு ஆபத்து (loss வேகமாக வளரும்).</li>
+<li><strong>எங்கே அதிகம்:</strong> ATM-ல் அதிகம். Far OTM, deep ITM-ல் குறைவு.</li>
+<li><strong>நேரம் (vega-க்கு நேர் எதிர்):</strong> Expiry நெருங்க ATM gamma அதிகமாகும். Expiry day-ல் உச்சம்.</li>
+<li><strong>உதாரணம்:</strong> Delta 0.50, gamma 0.001. Spot +100 → புதிய delta 0.60. அடுத்த 100 points-ல் premium முன்பை விட வேகமாக ஏறும்.</li>
+</ol>
+<p><strong>Nifty gamma — தோராய மதிப்புகள்</strong> (Nifty சுமார் 25,000, IV சுமார் 13%):</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Expiry-க்கு மீதி நாட்கள்</th>
+<th>ATM</th>
+<th>500 pts OTM</th>
+<th>1000 pts OTM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 நாள் (expiry day)</td>
+<td>~0.0023</td>
+<td>~0</td>
+<td>~0</td>
+</tr>
+<tr>
+<td>7 நாள் (weekly)</td>
+<td>~0.0009</td>
+<td>~0.0005</td>
+<td>~0.0001</td>
+</tr>
+<tr>
+<td>30 நாள் (monthly)</td>
+<td>~0.0004</td>
+<td>~0.0004</td>
+<td>~0.00025</td>
+</tr>
+<tr>
+<td>90 நாள்</td>
+<td>~0.00025</td>
+<td>~0.00023</td>
+<td>~0.0002</td>
+</tr>
+</tbody>
+</table></div>
+<ol>
+<li>Expiry day ATM gamma 0.0023 → spot 100 points நகர்ந்தால் delta 0.23 மாறும். இது weekly ATM-ஐ விட சுமார் 2.5 மடங்கு.</li>
+<li>Expiry day-ல் far OTM gamma கிட்டத்தட்ட பூஜ்யம். Spot அந்த strike அருகில் வந்தால் அது ATM ஆகி, gamma திடீரென்று உயரும்.</li>
+<li>நீண்ட expiry-ல் gamma எல்லா strikes-லும் கிட்டத்தட்ட சமமாகப் பரவியிருக்கும்.</li>
+</ol>
+<h2>விலையைக் கீழே இழுக்கும் இரண்டு சக்திகள்</h2>
+<p>Spot எதிர் திசையில் போகும்போது premium-ஐக் குறைக்கும் சக்திகள் இவை இரண்டு மட்டும். இவற்றை மீறியும் விலை ஏறுவது என்றால், அடுத்த பகுதியில் உள்ள காரணங்களில் ஒன்று வலுவாக வேலை செய்கிறது.</p>
+<ol>
+<li><strong>Delta (பொதுவாக 0.01 – 0.10)</strong><ul>
+<li>Spot எதிர் திசையில் நகர்ந்தால் premium குறையும்.</li>
+<li>ஆனால் delta சிறியது என்பதால் இந்தக் குறைவும் சிறியதே.</li>
+<li>உதாரணம்: delta 0.03, spot −100 points → premium சுமார் −₹3 மட்டும்.</li>
+</ul>
+</li>
+<li><strong>Theta (time decay)</strong><ul>
+<li>Spot நகராவிட்டாலும் ஒவ்வொரு நாளும் time value குறையும்.</li>
+<li>Expiry நெருங்க நெருங்க, premium-ன் சதவீதமாக இந்தக் குறைவு வேகமாகும்.</li>
+</ul>
+</li>
+</ol>
+<h2>எதிர் திசையிலும் விலையை மேலே தள்ளும் 7 காரணங்கள்</h2>
+<p>கீழே உள்ள ஏழு காரணங்களில் ஏதாவது ஒன்று, delta + theta இழுப்பதை விட வலுவாக இருந்தால் premium உயரும்.</p>
+<ol>
+<li><strong>IV / VIX உயர்வு (Vega effect)</strong><ul>
+<li>Downtrend-ல் பொதுவாக India VIX உயரும்.</li>
+<li>IV உயர்ந்தால் puts மட்டுமல்ல, calls-ன் premium-உம் உயரும்.</li>
+<li>Far OTM premium முழுவதும் time + volatility value என்பதால், IV மாற்றம் இதை சதவீத அளவில் அதிகம் பாதிக்கும்.</li>
+<li>Uptrend-ல் பொதுவாக VIX குறையும். அதனால் far OTM put-க்கு இந்தக் காரணம் குறைவாகவே வேலை செய்யும்.</li>
+</ul>
+</li>
+<li><strong>Trend-க்குள் திடீர் எதிர் move (relief rally / pullback)</strong><ul>
+<li>Downtrend-க்குள்ளும் intraday-ல் திடீர் மேல்நோக்கிய bounce வரும்.</li>
+<li>அந்த நேரத்தில் delta + gamma இரண்டும் சேர்ந்து call premium-ஐ வேகமாக ஏற்றும்.</li>
+<li>Bounce முடிந்ததும் premium மீண்டும் சரியும். இதுவே "ஏறி இறங்கும்" நடத்தைக்கு முக்கிய காரணம்.</li>
+</ul>
+</li>
+<li><strong>Expiry அருகில் Gamma</strong><ul>
+<li>Expiry நெருங்கும்போது சிறிய எதிர் move-கூட premium-ஐ பல மடங்கு ஏற்றலாம்.</li>
+<li>Spot strike-ஐ நோக்கி நகர்ந்தால் delta 0.02-லிருந்து 0.20 வரை வேகமாக உயரலாம்.</li>
+</ul>
+</li>
+<li><strong>Option writers short covering</strong><ul>
+<li>Downtrend-ல் பலர் far OTM calls-ஐ sell செய்திருப்பார்கள்.</li>
+<li>லாபத்தை book செய்ய அவர்கள் வாங்கும்போது demand உயரும், premium ஏறும்.</li>
+<li>இவர்கள் எப்போது cover செய்கிறார்கள் என்பது கீழே தனிப் பகுதியில் உள்ளது.</li>
+</ul>
+</li>
+<li><strong>Event-க்கு முந்தைய IV</strong><ul>
+<li>RBI policy, Budget, results, US data போன்ற events-க்கு முன் IV உயரும்.</li>
+<li>Spot எதிர் திசையில் இருந்தாலும் இரண்டு பக்க premium-உம் உயரலாம்.</li>
+<li>Event முடிந்ததும் IV crush ஆகி premium உடனே சரியும்.</li>
+</ul>
+</li>
+<li><strong>Low liquidity</strong><ul>
+<li>Far strikes-ல் order book மெல்லியதாக இருக்கும் (thin order book).</li>
+<li>சிறிய order கூட LTP-ஐ jump செய்ய வைக்கும்.</li>
+<li>Bid-ask spread அகலமாக இருப்பதால் LTP இரண்டு விலைகளுக்கு இடையே மாறி மாறி அடிக்கும்.</li>
+</ul>
+</li>
+<li><strong>Percentage illusion</strong><ul>
+<li>₹2-லிருந்து ₹3 ஆனால் அது 50% ஏற்றம். பெரிய move போலத் தெரியும்.</li>
+<li>ஆனால் ₹ அளவில் வெறும் 1 rupee மட்டுமே. சிறிய premium-ல் சிறிய மாற்றமும் பெரிய சதவீதமாகத் தெரியும்.</li>
+</ul>
+</li>
+</ol>
+<h2>எண் உதாரணம்</h2>
+<p>Spot 100 points விழுந்தும், ஒரு far OTM call-ன் premium ₹0.50 உயர்ந்திருக்கிறது. காரணம் VIX உயர்வு. (எண்கள் தோராயமானவை, விளக்கத்துக்காக மட்டும்.)</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>காரணி</th>
+<th>நிகழ்வு</th>
+<th>Premium மாற்றம் (₹)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Delta (0.03)</td>
+<td>Spot −100 points</td>
+<td>−3.00</td>
+</tr>
+<tr>
+<td>Theta</td>
+<td>ஒரு நாள் கடந்தது</td>
+<td>−0.50</td>
+</tr>
+<tr>
+<td>Vega (2)</td>
+<td>India VIX +2 points</td>
+<td>+4.00</td>
+</tr>
+<tr>
+<td><strong>நிகர மாற்றம்</strong></td>
+<td></td>
+<td><strong>+0.50</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>இங்கே delta மற்றும் theta இரண்டும் சேர்ந்து −₹3.50 இழுத்தன. Vega +₹4.00 தள்ளியது. அதனால் spot விழுந்தும் premium ஏறியது.</p>
+<h2>Call writers எப்போது short covering செய்கிறார்கள்</h2>
+<p>Short covering ஒரே விலையில் நடப்பதில்லை. வெவ்வேறு writers வெவ்வேறு நேரங்களில் இந்த ஆறு விதிகளில் ஒன்றைப் பின்பற்றி cover செய்வார்கள்.</p>
+<ol>
+<li><strong>Premium சதவீத லாபம்:</strong> Sell செய்த premium-ல் 50–80% லாபம் கிடைத்ததும். உதாரணம்: ₹20-க்கு sell → ₹10 முதல் ₹4 வரை வந்ததும் cover.</li>
+<li><strong>மீதி premium மிகக் குறைவு:</strong> ₹0.50 – ₹1 அளவுக்கு வந்தால், மீதி லாபம் brokerage + risk-ஐ ஒப்பிடும்போது சிறியது.</li>
+<li><strong>Margin விடுவித்து roll செய்வது:</strong> பழைய position மூடி, விடுபட்ட margin-ல் spot-க்கு அருகிலுள்ள strike அல்லது அடுத்த expiry-ஐ sell செய்வார்கள் (rolling down).</li>
+<li><strong>நேரம்:</strong> Expiry-க்கு முன் அல்லது expiry நாள் காலை. காரணம்: கடைசி நேர gamma risk.</li>
+<li><strong>Event-க்கு முன்:</strong> RBI, Budget, results, US data-க்கு முன். Event-க்குப் பிறகு gap-up வந்தால் loss பெரிதாகும்.</li>
+<li><strong>Spot support பகுதியை அடையும்போது:</strong> முந்தைய நாள் low, VAL, முக்கிய support-க்கு வந்தால் responsive buyers வரலாம் என்று bounce-க்கு முன்பே cover. இதுவே downtrend-க்குள் திடீர் call premium ஏற்றத்துக்கு ஒரு காரணம்.</li>
+</ol>
+<h2>Data-வில் எந்தக் காரணம் என்று அடையாளம் காணுவது</h2>
+<p>Premium மாற்றத்தையும் Open Interest (OI) மாற்றத்தையும் சேர்த்துப் பார்த்தால், premium ஏற்றத்துக்கு யார் காரணம் என்று கண்டுபிடிக்கலாம்.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Premium</th>
+<th>OI</th>
+<th>பொருள்</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ஏறுகிறது</td>
+<td>குறைகிறது</td>
+<td><strong>Short covering</strong> (writers வெளியேறுகிறார்கள்)</td>
+</tr>
+<tr>
+<td>ஏறுகிறது</td>
+<td>ஏறுகிறது</td>
+<td>புதிய buying</td>
+</tr>
+<tr>
+<td>இறங்குகிறது</td>
+<td>ஏறுகிறது</td>
+<td>புதிய writing</td>
+</tr>
+<tr>
+<td>இறங்குகிறது</td>
+<td>குறைகிறது</td>
+<td>Long unwinding</td>
+</tr>
+</tbody>
+</table></div>
+<p>Premium ஏறி, OI மாறாமல் India VIX உயர்ந்திருந்தால், அது பெரும்பாலும் IV (vega) காரணமாக இருக்கும்.</p>
+<h2>சுருக்கம்</h2>
+<ol>
+<li>Far OTM premium முழுவதும் time value. Expiry வரை strike-ஐத் தாண்டவில்லை என்றால் பூஜ்யம்.</li>
+<li>Delta மற்றும் theta far OTM premium-ஐ கீழே இழுக்கின்றன.</li>
+<li>Vega: IV ஏறினால் call, put இரண்டும் ஏறும். Downtrend-ல் VIX உயர்வு call premium-ஐயும் தூக்கும்.</li>
+<li>Gamma: expiry நெருங்க ATM-ல் உச்சம். Spot far OTM strike-ஐ நெருங்கினால் premium பல மடங்கு ஏறலாம்.</li>
+<li>IV, திடீர் எதிர் move, gamma, short covering, event, liquidity ஆகியவை premium-ஐ மேலே தள்ளுகின்றன.</li>
+<li>அந்த நேரத்தில் எந்தச் சக்தி வலுவாக இருக்கிறதோ, அந்தத் திசையில் premium நகரும். Premium + OI சேர்த்துப் பார்த்தால் காரணத்தை அடையாளம் காணலாம்.</li>
+</ol>
+<p><strong>கல்விசார் அறிவிப்பு:</strong> இந்த ஆவணம் கல்வி நோக்கத்திற்காக மட்டுமே. இதில் entry, target, stop-loss பரிந்துரைகள் இல்லை. Math by Thomas ஒரு SEBI-registered ஆலோசகர் அல்ல.</p>
+</article>
+</main>
+<footer class="wrap">
+  <nav><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+  <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
+  Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
+  <p class="disc">© 2026 Math by Thomas · India</p>
+</footer>
+</body>
+</html>
