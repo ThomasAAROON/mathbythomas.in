@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Risk &amp; Expectations — 5 Fingers — Math by Thomas</title>
+<meta name="description" content="How many losing trades in a row are normal for 5 Fingers? The mathematics of losing streaks, with 374 backtest trades and the limits we set in advance.">
+<meta property="og:title" content="Risk &amp; Expectations — 5 Fingers">
+<meta property="og:description" content="How many losing trades in a row are normal for 5 Fingers? The mathematics of losing streaks, with 374 backtest trades and the limits we set in advance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mathbythomas.in/risk.html">
+<meta property="og:image" content="https://mathbythomas.in/scorecard-2026-10-12.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+<style>
+.box{border-radius:10px;padding:12px 16px;margin:14px 0;background:var(--card);border-left:5px solid var(--gold-d)}
+.box .lbl{display:block;font-weight:700;color:var(--gold);margin-bottom:4px}
+.box.thm{border-left-color:#3d8b4f}.box.ex{border-left-color:#8a7458}.box.note2{border-left-color:#4a6a9a}.box.warn{border-left-color:#c0564a}
+.f{font-size:19px;text-align:center;margin:10px 0;font-weight:700;color:var(--cream)}
+.doc h3{color:var(--gold);margin-top:18px}
+.small{color:var(--muted);font-size:15px}
+.doc table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}
+.doc th,.doc td{border:1px solid #5a4330;padding:7px 10px;text-align:left}
+.doc th{background:#3a281b;color:var(--gold)}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="index.html"><img src="logo.svg" width="46" height="46" alt=""><b>Math by Thomas</b></a>
+  <nav class="main"><a href="index.html">Home</a><a href="5-fingers.html" class=on>5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="index.html#contact">Contact</a></nav>
+</header>
+<main class="wrap">
+<div class="doc">
+<div class="hero" style="padding-bottom:0">
+    <h1>Risk &amp; Expectations</h1>
+    <p class="lead">தொடர் நஷ்டத்தின் கணிதம் — 5 Fingers எப்போது "இயல்பாக" இருக்கிறது, எப்போது உடைகிறது</p>
+    <p class="ta">Thomas (Math by Thomas) · அக்டோபர் 2026 · Backtest 2019–2026 (374 trades, 6 points cost கழித்து) + live பதிவு</p>
+  </div>
+<h2>அத்தியாயம் 1 · ஏன் இந்தப் பாடம்?</h2>
+<p>ஒரு trading system-இன் மதிப்பு அதன் சிறந்த வாரத்தில் தெரிவதில்லை; அதன் மோசமான காலத்தை trader எப்படி எதிர்கொள்கிறார் என்பதில்தான் தெரிகிறது. பெரும்பாலான traders ஒரு system-ஐக் கைவிடுவது, அது உண்மையில் உடைந்ததால் அல்ல; தொடர்ந்து சில நஷ்டங்கள் வந்ததும் "இது வேலை செய்யவில்லை" என்று உணர்ச்சியால் முடிவு செய்வதால். இந்தப் பாடத்தின் நோக்கம், அந்த முடிவை உணர்ச்சியிலிருந்து கணிதத்துக்கு மாற்றுவது. முதலில் தொடர் நஷ்டத்தின் நிகழ்தகவை வரையறுப்போம்; பிறகு ஒரு வருடத்தில் எதிர்பார்க்க வேண்டிய அதிகபட்சத் தொடரைக் கணக்கிடும் formula-வைப் பெறுவோம்; இறுதியில் அதை 5 Fingers-இன் 374 trades கொண்ட backtest-உடனும், live பதிவுடனும் ஒப்பிடுவோம்.</p>
+
+<h2>அத்தியாயம் 2 · அடிப்படை வரையறைகள்</h2>
+<div class="box"><span class="lbl">வரையறை 2.1 — Trade முடிவுகள்</span>
+ஒவ்வொரு trade-உம் மூன்றில் ஒன்றாக முடிகிறது: <b>லாபம் (W)</b>, <b>நஷ்டம் (L)</b>, அல்லது <b>breakeven (BE)</b> — அதாவது stop entry விலைக்கு நகர்த்தப்பட்டு, செலவு மட்டும் இழக்கப்படும் நிலை.</div>
+<div class="box"><span class="lbl">வரையறை 2.2 — நஷ்ட வாய்ப்பு q</span>
+மொத்த trades-இல் நஷ்டமாக முடிந்தவற்றின் விகிதம் q. உதாரணமாக 100 trades-இல் 20 நஷ்டம் என்றால் q = 0.20. லாப வாய்ப்பு p = 1 − q என்று எழுதுவது வழக்கம்; ஆனால் breakeven உள்ள system-இல் p, q, BE மூன்றும் சேர்ந்தே 1 ஆகும்.</div>
+<div class="box"><span class="lbl">வரையறை 2.3 — தொடர் (streak)</span>
+அடுத்தடுத்து வரும் ஒரே வகை முடிவுகளின் எண்ணிக்கை. "தொடர் நஷ்டம்" என்பது இடையில் வேறு முடிவு இல்லாமல் தொடர்ந்து வந்த நஷ்டங்களின் எண்ணிக்கை. "லாபம் இல்லாத தொடர்" என்பது நஷ்டமும் breakeven-உம் கலந்து, இடையில் ஒரு லாபமும் இல்லாமல் வந்த trades-இன் எண்ணிக்கை.</div>
+<div class="box"><span class="lbl">வரையறை 2.4 — Drawdown</span>
+மொத்தக் கணக்கு ஒரு உச்சத்தைத் தொட்ட பின், அந்த உச்சத்திலிருந்து எவ்வளவு கீழே இறங்கியது என்பது. மிகப் பெரிய இறக்கம் <b>max drawdown</b>. இது "மொத்த நஷ்டம்" அல்ல: இரண்டு நஷ்டங்களுக்கு இடையே புதிய உச்சம் வந்தால், அவை ஒரே இறக்கமாகக் கணக்கிடப்படுவதில்லை.</div>
+
+<h2>அத்தியாயம் 3 · தொடர் நஷ்டத்தின் நிகழ்தகவு</h2>
+<p>ஒவ்வொரு trade-இன் முடிவும் முந்தைய trade-ஐச் சாராமல் நடக்கிறது என்று எடுத்துக்கொள்வோம். அப்படியானால், இரண்டு நஷ்டங்கள் அடுத்தடுத்து வரும் வாய்ப்பு q × q; மூன்று என்றால் q × q × q. பொதுவாக:</p>
+<div class="box thm"><span class="lbl">விதி 3.1</span><div class="f">தொடர்ந்து n நஷ்டங்கள் வரும் வாய்ப்பு = qⁿ</div></div>
+<div class="box ex"><span class="lbl">எடுத்துக்காட்டு 3.1</span>
+q = 0.5 என்றால், தொடர்ந்து 5 நஷ்டம் வரும் வாய்ப்பு 0.5⁵ = 0.03125, அதாவது சுமார் 3%. இது சிறிய எண்ணாகத் தெரியும். ஆனால் இது ஒரு குறிப்பிட்ட இடத்தில் தொடங்கும் வாய்ப்பு மட்டுமே. ஒரு வருடத்தில் நூற்றுக்கணக்கான trades நடக்கும்போது, தொடர் தொடங்கக்கூடிய இடங்களும் நூற்றுக்கணக்கானவை. அதனால் "3% தானே" என்ற எண் ஏமாற்றக்கூடியது.</div>
+
+<h2>அத்தியாயம் 4 · ஒரு வருடத்தில் எதிர்பார்க்க வேண்டிய அதிகபட்சத் தொடர்</h2>
+<p>N trades கொண்ட ஒரு காலத்தில், நீளம் k கொண்ட தொடர் நஷ்டம் குறைந்தது ஒரு முறையாவது வர எதிர்பார்க்கலாமா என்று கேட்போம். தொடர் தொடங்கக்கூடிய இடங்கள் சுமார் N; ஒவ்வொன்றிலும் வாய்ப்பு qᵏ. எதிர்பார்க்கப்படும் எண்ணிக்கை N × qᵏ. இந்த எண் 1-ஐ ஒட்டி இருக்கும் k தான், அந்தக் காலத்தில் எதிர்பார்க்க வேண்டிய அதிகபட்சத் தொடர். N × qᵏ = 1 என்று வைத்து k-ஐத் தீர்த்தால்:</p>
+<div class="box thm"><span class="lbl">விதி 4.1 — எளிய formula</span><div class="f">அதிகபட்சத் தொடர் ≈ log(N) ÷ log(1 ÷ q)</div>
+log எந்த அடிமானத்திலும் இருக்கலாம்; மேலும் கீழும் ஒரே அடிமானம் இருந்தால் போதும்.</div>
+<div class="box ex"><span class="lbl">எடுத்துக்காட்டு 4.1</span>
+250 trades, q = 0.5: log(250) ÷ log(2) = 5.52 ÷ 0.69 ≈ <b>8</b>. q = 0.6 என்றால் ≈ <b>11</b>; q = 0.4 என்றால் ≈ <b>6</b>. அதாவது 50% வெற்றி தரும் ஒரு நல்ல system-இலும், ஒரு வருடத்தில் 8 தொடர் நஷ்டங்கள் வருவது கணித ரீதியாக இயல்பானது.</div>
+<div class="box note2"><span class="lbl">மேம்பட்ட குறிப்பு 4.2 — துல்லியமான வடிவம்</span>
+ஒரு தொடர் "தொடங்க" அதற்கு முந்தைய trade நஷ்டமாக இருக்கக் கூடாது. அதனால் தொடக்க இடங்களின் எண்ணிக்கை N அல்ல, சுமார் N × (1 − q). இதைச் சேர்த்தால் formula: <b>log(N × (1 − q)) ÷ log(1 ÷ q)</b>. Trades குறைவாக இருக்கும்போது இந்த வடிவம் சற்றுத் துல்லியமானது; பல ஆண்டுகளின் trades-க்கு இரண்டு வடிவங்களும் நெருக்கமான பதிலைத் தரும். அத்தியாயம் 6-இல் இரண்டையும் உண்மை data-வுடன் ஒப்பிடுவோம்.</div>
+<div class="box warn"><span class="lbl">எச்சரிக்கை 4.3 — Formula-வின் வரம்பு</span>
+இந்த formula ஒவ்வொரு trade-உம் சுதந்திரமானது என்று எடுத்துக்கொள்கிறது. உண்மைச் சந்தையில் நஷ்டங்கள் சில நேரம் சேர்ந்து வருகின்றன (ஒரே வகையான சந்தைக் காலம் சில வாரங்கள் நீடிக்கும்போது). அதனால் formula ஒரு <b>வழிகாட்டி</b>; இறுதி எல்லையை system-இன் சொந்த backtest தான் தர வேண்டும்.</div>
+
+<h2>அத்தியாயம் 5 · 5 Fingers: ஆய்வுப் பின்னணி</h2>
+<p>5 Fingers என்பது Nifty 50-க்கான intraday கருவி; Machine Learning மாதிரியும் Market Profile விதிகளும் இணைந்தது. Entry, stop, exit நேரம் அனைத்தும் முன்பே நிர்ணயிக்கப்பட்டவை; லாபம் ஒரு குறிப்பிட்ட அளவை எட்டியதும் stop entry விலைக்கு நகர்த்தப்படுகிறது (breakeven விதி). இதை 2019 முதல் 2026 வரையிலான 1-நிமிட data-வில் walk-forward முறையில் சோதித்தோம் — ஒவ்வொரு ஆண்டும் அதற்கு முந்தைய ஆண்டுகளின் data-வை மட்டுமே கொண்டு கணிக்கப்பட்டது. ஒவ்வொரு trade-க்கும் 6 points செலவு கழிக்கப்பட்டது. மொத்தம் 374 trades.</p>
+<div class="tablewrap"><table>
+<tr><th>அளவு</th><th>2019–2024</th><th>2025–2026</th></tr>
+<tr><td>Trades (வருடத்துக்கு)</td><td>247 (≈41)</td><td>127 (≈64)</td></tr>
+<tr><td>லாபம் (W)</td><td>26%</td><td>29%</td></tr>
+<tr><td>Breakeven (BE)</td><td>51%</td><td>56%</td></tr>
+<tr><td>நஷ்டம் (L) — q</td><td>22%</td><td>15%</td></tr>
+<tr><td>மொத்தம் (செலவு கழித்து)</td><td>+1,624 points</td><td>+1,251 points</td></tr>
+<tr><td>Max drawdown</td><td>−898</td><td>−556</td></tr>
+<tr><td>அதிகபட்சத் தொடர் நஷ்டம்</td><td>4</td><td>3</td></tr>
+<tr><td>அதிகபட்ச லாபம் இல்லாத தொடர்</td><td>13</td><td>10</td></tr>
+<tr><td>மோசமான ஒரு trade</td><td>−219</td><td>−178</td></tr>
+</table></div>
+<p>இந்த அட்டவணையின் அமைப்பைக் கவனியுங்கள்: பத்து trades-இல் சுமார் மூன்று லாபம், ஐந்து breakeven, இரண்டு நஷ்டம். லாபம் தரும் மூன்று trades பெரிய நகர்வுகளைப் பிடிக்கின்றன; breakeven விதி நஷ்டங்களைச் சிறியதாக்குகிறது. இதுவே system-இன் இயல்பு; அதிக வெற்றி விகிதம் இதன் இலக்கு அல்ல.</p>
+
+<h2>அத்தியாயம் 6 · Formula-வை உண்மையுடன் சோதித்தல்</h2>
+<h3>6.1 தொடர் நஷ்டம்</h3>
+<p>2019–2024: q = 0.22, ஆண்டுக்கு N ≈ 41. எளிய formula: log(41) ÷ log(1 ÷ 0.22) = 3.71 ÷ 1.51 ≈ <b>2.5</b> ஒரு ஆண்டுக்கு. ஆறு ஆண்டுகளின் 247 trades-க்குத் துல்லிய வடிவம்: log(247 × 0.78) ÷ 1.51 ≈ <b>3.5</b>. Backtest-இல் உண்மையில் வந்தது <b>4</b>. 2025–26-க்கு (q = 0.15, 127 trades) துல்லிய வடிவம் ≈ <b>2.5</b>; உண்மை <b>3</b>. இரண்டு காலங்களிலும் உண்மை, formula-வை விட ஒன்று அதிகம் — எச்சரிக்கை 4.3 சொன்னது போல நஷ்டங்கள் சற்றுச் சேர்ந்து வருகின்றன.</p>
+<h3>6.2 லாபம் இல்லாத தொடர்</h3>
+<p>Trader-ஐ அதிகம் சோர்வடையச் செய்வது முழு நஷ்டம் அல்ல; லாபம் வராத நீண்ட காலம். இங்கே "தோல்வி" என்பதை நஷ்டம் அல்லது breakeven என்று எடுத்தால், 2019–24-இல் அதன் வாய்ப்பு 0.74. எளிய formula ஒரு ஆண்டுக்கு: log(41) ÷ log(1 ÷ 0.74) = 3.71 ÷ 0.305 ≈ <b>12</b>. ஆறு ஆண்டுகளுக்குத் துல்லிய வடிவம்: log(247 × 0.26) ÷ 0.305 ≈ <b>13.7</b>. Backtest-இல் உண்மையில் வந்தது <b>13</b>.</p>
+<div class="tablewrap"><table>
+<tr><th>அளவு</th><th>Formula</th><th>Backtest உண்மை</th></tr>
+<tr><td>தொடர் நஷ்டம், 2019–24 (247 trades)</td><td>≈ 3.5</td><td>4</td></tr>
+<tr><td>தொடர் நஷ்டம், 2025–26 (127 trades)</td><td>≈ 2.5</td><td>3</td></tr>
+<tr><td>லாபம் இல்லாத தொடர், 2019–24</td><td>≈ 13.7</td><td>13</td></tr>
+<tr><td>லாபம் இல்லாத தொடர், 2025–26</td><td>≈ 10.5</td><td>10</td></tr>
+</table></div>
+<p>கணிதமும் உண்மையும் இவ்வளவு நெருக்கமாக இருப்பது இரண்டு விஷயங்களைச் சொல்கிறது. முதலாவது, 5 Fingers-இன் நீண்ட லாபம் இல்லாத காலங்கள் மர்மம் அல்ல; அவை அதன் வெற்றி விகிதத்தின் நேரடிக் கணித விளைவு. இரண்டாவது, இந்த எண்களை வைத்து, ஒரு system "இயல்பாக" இருக்கிறதா என்று முன்கூட்டியே எல்லை வகுக்க முடியும்.</p>
+
+<h2>அத்தியாயம் 7 · முன்பே எழுதிய எல்லைகள்</h2>
+<p>ஒரு system உடைந்ததா என்பதை, அது நடக்கும் நேரத்தில் உணர்ச்சியால் முடிவு செய்யக் கூடாது. அதனால் 5 Fingers-க்கு கீழ்க்கண்ட எல்லைகள் இப்போதே நிர்ணயிக்கப்படுகின்றன. சமீபத்திய காலத்துக்கு (2025–26) அதிக எடை தரப்பட்டு, அது "இயல்பு" எல்லையாகவும், நீண்ட காலம் (2019–24) "கவனம்" எல்லையாகவும் வைக்கப்படுகிறது.</p>
+<div class="tablewrap"><table>
+<tr><th>நிலை</th><th>Drawdown</th><th>தொடர் நஷ்டம்</th><th>லாபம் இல்லாத தொடர்</th><th>செயல்</th></tr>
+<tr><td>🟢 இயல்பு</td><td>−556 வரை</td><td>3 வரை</td><td>10 வரை</td><td>எதுவும் மாற்றம் இல்லை</td></tr>
+<tr><td>🟡 கவனம்</td><td>−556 முதல் −898</td><td>4</td><td>11–13</td><td>Position அளவைக் குறைத்தல்</td></tr>
+<tr><td>🔴 மறுஆய்வு</td><td>−898-க்கு மேல்</td><td>5 அல்லது அதற்கு மேல்</td><td>14 அல்லது அதற்கு மேல்</td><td>Live நிறுத்தம், மறுஆய்வு, வெளிப்படையான அறிவிப்பு</td></tr>
+</table></div>
+<div class="box warn"><span class="lbl">மறைக்காத உண்மைகள்</span>
+2019–2026 backtest-இல் இரண்டு ஆண்டுகள் நஷ்டத்தில் முடிந்தன: 2022 (−377), 2024 (−164). ஆகவே ஒரு முழு ஆண்டு லாபம் இல்லாமல் போவதும் இந்த system-இன் இயல்பான வரம்புக்குள் அடங்கும். ஒரு trade-இன் நஷ்டம் சுமார் −220 points வரை வந்துள்ளது.</div>
+
+<h2>அத்தியாயம் 8 · Live பதிவுடன் ஒப்பீடு</h2>
+<p>07 அக்டோபர் 2026 பொது வெளியீடு முதல் 23 அக்டோபர் வரை, 5 Fingers 7 trades எடுத்தது: 4 லாபம், 0 நஷ்டம், 3 breakeven; மொத்தம் +1,041 points (செலவு கழிக்காமல்). தொடர் நஷ்டம் 0, லாபம் இல்லாத தொடர் அதிகபட்சம் 2, drawdown 0 — அனைத்தும் 🟢 எல்லைக்குள். ஆனால் 7-இல் 4 லாபம் (57%) என்பது backtest-இன் 26–29%-ஐ விட மிக அதிகம். கணிதம் சொல்வது தெளிவு: இது நீடிக்காது. வரும் வாரங்களில் breakeven-களும் நஷ்டங்களும் கூடும்; அப்போது அவை அத்தியாயம் 7-இன் எல்லைக்குள் இருக்கின்றனவா என்பதே ஒரே கேள்வி.</p>
+
+<h2>பயிற்சிக் கணக்குகள்</h2>
+<div class="box ex"><span class="lbl">கணக்கு 1</span>ஒரு system-இல் q = 0.30, வருடத்துக்கு 100 trades. ஒரு வருடத்தில் எதிர்பார்க்க வேண்டிய அதிகபட்சத் தொடர் நஷ்டம் எவ்வளவு (எளிய formula)?<br>
+<span class="small">விடை: log(100) ÷ log(1 ÷ 0.3) = 4.61 ÷ 1.20 ≈ 3.8, அதாவது சுமார் 4.</span></div>
+<div class="box ex"><span class="lbl">கணக்கு 2</span>அதே system-இல் தொடர்ந்து 4 நஷ்டம் ஒரு குறிப்பிட்ட இடத்தில் தொடங்கும் வாய்ப்பு என்ன?<br>
+<span class="small">விடை: 0.3⁴ = 0.0081, அதாவது 0.81%.</span></div>
+<div class="box ex"><span class="lbl">கணக்கு 3</span>5 Fingers-இல் லாபம் இல்லாத வாய்ப்பு 0.71 (2025–26), வருடத்துக்கு 64 trades. ஒரு வருடத்தில் எதிர்பார்க்க வேண்டிய லாபம் இல்லாத தொடர் எவ்வளவு?<br>
+<span class="small">விடை: log(64) ÷ log(1 ÷ 0.71) = 4.16 ÷ 0.342 ≈ 12.</span></div>
+
+<h2>சுருக்கம்</h2>
+<p>தொடர் நஷ்டம் ஒரு system-இன் தோல்வி அல்ல; அதன் வெற்றி விகிதத்தின் கணித விளைவு. qⁿ ஒரு குறிப்பிட்ட தொடரின் வாய்ப்பைத் தருகிறது; log(N) ÷ log(1 ÷ q) ஒரு காலத்தில் எதிர்பார்க்க வேண்டிய அதிகபட்சத் தொடரைத் தருகிறது. 5 Fingers-இன் 374 backtest trades-இல் இந்த formula உண்மையுடன் நெருக்கமாகப் பொருந்துகிறது: 10–13 trades லாபம் இல்லாமல் போவது இதன் இயல்பு. நம்பிக்கை "எப்போதும் லாபம்" என்ற வாக்குறுதியிலிருந்து வருவதில்லை; மோசமான காலம் எப்படி இருக்கும் என்று முன்பே தெரிந்திருப்பதிலிருந்து வருகிறது. ஒவ்வொரு வாரமும் mathbythomas.in-இல் வெளியிடப்படும் scorecard-உடன் இந்த எல்லைகளை நீங்களே ஒப்பிடலாம்.</p>
+
+
+<p style="margin-top:20px"><a href="scorecards.html">Weekly scorecards →</a> · <a href="5-fingers.html">5 Fingers →</a></p>
+</div>
+</main>
+<footer class="wrap">
+  <nav><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="risk.html">Risk &amp; Expectations</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+  <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
+  Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
+  <p class="disc">© 2026 Math by Thomas · India</p>
+</footer>
+</body>
+</html>
