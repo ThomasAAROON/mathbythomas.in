@@ -61,4 +61,5 @@ details p{margin-top:8px;color:var(--cream);font-size:16px}
 .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:10px;border:1px solid var(--gold-d);color:var(--gold);margin-left:6px;vertical-align:middle}
 .timeline li{margin:6px 0}
 footer .disc{margin-top:8px;font-size:13px;line-height:1.5}
-footer nav a{margin-right:14px}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 14px}
+footer nav a{margin-right:0}
