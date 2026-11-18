@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>பணம் எந்த அமைப்பிலிருந்து வருகிறது? — Math by Thomas</title>
+<meta name="description" content="மார்க்கெட்டில் பணம் direction கணிப்பிலிருந்து அல்ல, அமைப்பிலிருந்து (structure) வருகிறது — VIX vs நடந்த move, bad days, option selling cost, 5Fingers 27% win rate. Math by Thomas ஆய்வு.">
+<meta property="og:title" content="பணம் எந்த அமைப்பிலிருந்து வருகிறது? — Math by Thomas">
+<meta property="og:description" content="மார்க்கெட்டில் பணம் direction கணிப்பிலிருந்து அல்ல, அமைப்பிலிருந்து (structure) வருகிறது — VIX vs நடந்த move, bad days, option selling cost, 5Fingers 27% win rate. Math by Thomas ஆய்வு.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mathbythomas.in/money-structure.html">
+<meta property="og:image" content="https://mathbythomas.in/money-structure-1.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="index.html"><img src="logo.svg" width="46" height="46" alt=""><b>Math by Thomas</b></a>
+  <nav class="main"><a href="index.html">Home</a><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="index.html#contact">Contact</a></nav>
+</header>
+<main class="wrap">
+<article class="doc">
+  <div class="hero" style="padding-bottom:0">
+    <p class="ta"><a href="articles.html">← Articles</a> · Market ஆய்வு</p>
+    <h1>பணம் எந்த அமைப்பிலிருந்து வருகிறது?</h1>
+    <p class="ta">Thomas Aaroon · 17 November 2026 · தமிழ்</p>
+  </div>
+<h2>அறிமுகம்</h2>
+<p>இந்தக் கட்டுரையின் நான்கு சோதனைகளும் ஒரே பதிலைத் தருகின்றன: மார்க்கெட்டில் பணம்,
+direction-ஐ சரியாகக் கணிப்பதால் வருவதில்லை. அது ஒரு
+<strong>அமைப்பிலிருந்து</strong> (structure) வருகிறது.</p>
+<p>பின்னணிக்கு ஒரு வரி மட்டும். SEBI ஆய்வின்படி, FY24-ல் proprietary traders,
+FPIs இருவரும் சேர்ந்து சுமார் ₹61,000 கோடி லாபம் எடுத்தார்கள். அந்த லாபத்தில்
+96–97% algo trading மூலம் வந்தது (<a
+href="https://taxguru.in/sebi/sebi-study-shows-93-percent-individual-fo-traders-incur-losses.html">SEBI
+study summary</a>). அவர்களின் code நமக்குத் தெரியாது. ஆனால் அவர்கள் எந்த வகை
+அமைப்பிலிருந்து பணம் எடுக்கிறார்கள் என்பது தெரியும். அதை நம் சொந்த data-வில் சோதிக்க
+முடியும்.</p>
+<p>வீட்டில் இருந்து trade செய்யும் நாம் பல backtests செய்கிறோம். அவற்றில்
+பெரும்பாலானவை ஒரே கேள்வியைக் கேட்கின்றன: "அடுத்து மேலே போகுமா, கீழே போகுமா?"
+அவற்றில் வெற்றி மிகக் குறைவு. இந்தக் கட்டுரை வேறு ஒரு கேள்வியைக் கேட்கிறது:
+<strong>"இந்த trade-ல் எனக்கு பணம் யார் கொடுக்கிறார்கள், ஏன்
+கொடுக்கிறார்கள்?"</strong></p>
+<p><strong>பயன்படுத்திய data:</strong></p>
+<ol type="1">
+<li><p>NIFTY daily close, India VIX daily close: 2016 முதல் 16-Nov-2026
+வரை</p></li>
+<li><p>NSE F&amp;O bhavcopy: 2016 முதல் 28-Sep-2026 வரை (2,659
+நாட்கள்)</p></li>
+<li><p>5Fingers live v2.1 trade ledger: 375 trades</p></li>
+</ol>
+<p><strong>சோதனை முறை:</strong> DEV காலம் = data தொடக்கம் முதல் Dec 2024
+வரை. TEST காலம் = 2025–26. TEST ஒரே ஒரு முறை மட்டும் பார்க்கப்பட்டது. Cost எல்லா
+P&amp;L கணக்குகளிலும் கழிக்கப்பட்டிருக்கிறது.</p>
+<h2>இரண்டு கேள்விகள்</h2>
+<p>Retail trader கேட்கும் கேள்வி direction பற்றியது. பெரிய நிறுவனம் கேட்கும்
+கேள்வி அமைப்பு பற்றியது. இரண்டும் வேறு வேறு வகையான வேலைகளுக்கு இட்டுச்
+செல்கின்றன.</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th></th>
+<th>Direction கேள்வி</th>
+<th>அமைப்பு கேள்வி</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>கேள்வி</td>
+<td>அடுத்து மேலே போகுமா, கீழே போகுமா?</td>
+<td>இந்த trade-ல் பணம் யார் கொடுக்கிறார்கள், ஏன்?</td>
+</tr>
+<tr class="even">
+<td>லாபம் எதைப் பொறுத்தது</td>
+<td>சரியான கணிப்பு</td>
+<td>மீண்டும் மீண்டும் நடக்கும் ஒரு விலை வித்தியாசம்</td>
+</tr>
+<tr class="odd">
+<td>ஒரு trade-க்கு edge</td>
+<td>மிகக் குறைவு, மாறிக்கொண்டே இருக்கும்</td>
+<td>சிறியது, ஆனால் நிலையானது</td>
+</tr>
+<tr class="even">
+<td>முக்கிய ஆபத்து</td>
+<td>Cost, edge-ஐ முழுவதும் சாப்பிடுவது</td>
+<td>அரிதான பெரிய நாள் ஒன்று</td>
+</tr>
+<tr class="odd">
+<td>சோதிக்க வேண்டியது</td>
+<td>Win rate சதவீதம்</td>
+<td>விலை வித்தியாசம் இருக்கிறதா, cost-ஐ விடப் பெரியதா, மோசமான நாளில் எவ்வளவு
+நஷ்டம்</td>
+</tr>
+</tbody>
+</table></div>
+<p>அமைப்பு கேள்விக்கு மூன்று பகுதிகள் உண்டு:</p>
+<ol type="1">
+<li><p><strong>யார் கொடுக்கிறார்:</strong> அவசரமாக வாங்குபவர், option
+வாங்குபவர், தாமதமாக வருபவர், அதிக cost கொடுப்பவர்.</p></li>
+<li><p><strong>ஏன் கொடுக்கிறார்:</strong> உடனடி fill தேவை, பெரிய move-க்கு
+பயம், விலை வித்தியாசம் தெரியாதது.</p></li>
+<li><p><strong>எவ்வளவு நாள் நீடிக்கும்:</strong> அந்தக் காரணம் மாறாமல் இருந்தால்,
+அந்த விலை வித்தியாசமும் தொடரும்.</p></li>
+</ol>
+<h2>பெரிய நிறுவனங்களின் 5 அமைப்புகள்</h2>
+<p>பெரிய நிறுவனங்களின் ஐந்து லாப வழிகளில், நான்கில் direction தேவையில்லை.
+ஐந்தாவது வழி direction-ஐ கணிக்கவில்லை, அதை உருவாக்க முயற்சிக்கிறது.</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>அமைப்பு</th>
+<th>பணம் யாரிடமிருந்து, ஏன்</th>
+<th>Direction தேவையா</th>
+<th>Retail செய்ய முடியுமா</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Market making</td>
+<td>Bid-ல் வாங்கி Ask-ல் விற்கிறார்கள். உடனடி fill வேண்டும் market order
+கொடுக்கிறது</td>
+<td>இல்லை, delta hedge</td>
+<td>இல்லை (speed, அளவு)</td>
+</tr>
+<tr class="even">
+<td>2. Option selling</td>
+<td>Option buyer, நடக்கும் move-ஐ விட அதிக premium கொடுக்கிறார்</td>
+<td>இல்லை, delta hedge</td>
+<td>ஓரளவு (cost முக்கியம்)</td>
+</tr>
+<tr class="odd">
+<td>3. Arbitrage</td>
+<td>Cash, futures, options இடையே விலை வித்தியாசம்</td>
+<td>இல்லை</td>
+<td>இல்லை (speed)</td>
+</tr>
+<tr class="even">
+<td>4. Speed + குறைந்த cost</td>
+<td>தாமதமாக வருபவர், அதிக cost கொடுப்பவர்</td>
+<td>இல்லை</td>
+<td>இல்லை</td>
+</tr>
+<tr class="odd">
+<td>5. பணத்தின் அளவு (size)</td>
+<td>Index-ஐத் தாமே நகர்த்தி, options-ல் லாபம்</td>
+<td>உருவாக்கப்படுகிறது</td>
+<td>இல்லை. அனுமதியும் இல்லை</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ஐந்தாவது வழிக்கு ஒரு உதாரணம்: Jane Street வழக்கு (SEBI interim
+order, July 2025).</strong> இவை SEBI-ன் குற்றச்சாட்டுகள், இறுதித் தீர்ப்பு
+இல்லை.</p>
+<ol type="1">
+<li><p>17-Jan-2024 காலையில் ₹4,370 கோடிக்கு Bank Nifty stocks வாங்கி
+index-ஐ மேலே தள்ளியது.</p></li>
+<li><p>அதே நேரத்தில் ₹32,115 கோடிக்கு bearish options positions எடுத்தது.
+இது stock வாங்கியதை விட 7.3 மடங்கு பெரியது.</p></li>
+<li><p>மதியம் stocks-ஐ விற்று index-ஐக் கீழே இறக்கியது. Stocks-ல் நஷ்டம்,
+options-ல் அதைவிட அதிக லாபம். அந்த ஒரு நாளில் net லாபம் சுமார் ₹734
+கோடி.</p></li>
+<li><p>இதே முறை 15 expiry நாட்களில் மீண்டும் நடந்ததாக SEBI கூறியது (<a
+href="https://www.outlookbusiness.com/markets/sebis-action-against-jane-street-a-turning-point-for-fpis-and-algo-trading-in-india">Outlook
+Business</a>, <a
+href="https://www.brecorder.com/news/amp/40371851">Business
+Recorder</a>).</p></li>
+</ol>
+<p>இந்த வழக்கின் பாடம்: அவர்கள் முதலில் கேட்டது "எந்தப் பக்கம்?" அல்ல. "Options
+விலைக்கும் stocks விலைக்கும் இடையே என்ன வித்தியாசம், அதில் எந்த அளவு பணம்
+இருக்கிறது?" என்று கேட்டார்கள். இது அமைப்பு கேள்வி. சாதாரண trader இந்த ஐந்தில்
+இரண்டாவது அமைப்பை மட்டுமே நேரடியாகச் சோதிக்க முடியும். அடுத்த மூன்று சோதனைகளும்
+அதைச் செய்கின்றன.</p>
+<h2>சோதனை 1: VIX சொன்ன move vs நடந்த
+move</h2>
+<p>முடிவு: சுமார் 70% நாட்களில், அடுத்த நாள் NIFTY move, முந்தைய நாள் VIX சொன்ன
+move-ஐ விடக் குறைவாக இருந்தது. இது 11 வருடமும் தொடர்ந்து நடந்தது.</p>
+<p><strong>கணக்கு முறை:</strong></p>
+<ol type="1">
+<li><p>VIX சொன்ன move (points) = நேற்றைய NIFTY close × (நேற்றைய VIX ÷ 100)
+÷ √365</p></li>
+<li><p>நடந்த move = | இன்றைய close − நேற்றைய close |, திசை
+பார்க்காமல்</p></li>
+<li><p>Ratio = நடந்த move ÷ VIX சொன்ன move</p></li>
+<li><p>Good: ratio &lt; 0.7 · Neutral: 0.7 – 1.0 · Bad: ratio &gt;
+1.0</p></li>
+</ol>
+<p>உதாரணம்: NIFTY 24,000, VIX 14 என்றால், VIX சொன்ன move சுமார் 176
+points.</p>
+<p><img src="money-structure-1.png" alt="" loading="lazy" style="width:100%;height:auto;border-radius:10px;border:1px solid #5a4330;margin-top:14px;background:#fff"></p>
+<p>VPS data · nifty_daily.csv + vix_daily.csv · 2,679 நாட்கள், 2016 –
+16-Nov-2026</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>காலம்</th>
+<th>நாட்கள்</th>
+<th>Good</th>
+<th>Neutral</th>
+<th>Bad</th>
+<th>Median ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DEV (2016–2024)</td>
+<td>2,214</td>
+<td>54.7%</td>
+<td>16.0%</td>
+<td>29.3%</td>
+<td>0.62</td>
+</tr>
+<tr class="even">
+<td>TEST (2025–26)</td>
+<td>465</td>
+<td>50.8%</td>
+<td>18.1%</td>
+<td>31.2%</td>
+<td>0.68</td>
+</tr>
+</tbody>
+</table></div>
+<p>Median ratio 0.62–0.68. அதாவது ஒரு சாதாரண நாளில், VIX சொன்ன move-ல்
+மூன்றில் இரண்டு பங்கு மட்டுமே நடக்கிறது. இந்த வித்தியாசத்தைத் தான் option seller
+விற்கிறார். இது இரண்டாவது அமைப்பு உண்மையில் இருக்கிறது என்பதற்கான நேரடி
+சான்று.</p>
+<p>2026 தான் மிக பலவீனமான வருடம்: Good 46.3%, Bad 33.3%, median ratio 0.73.
+இவை மூன்றும் 11 வருடங்களில் மோசமான எண்கள்.</p>
+<h2>சோதனை 2: Bad நாட்களின் அளவு</h2>
+<p>முடிவு: Bad நாட்களில் சுமார் 80%, VIX சொன்னதை விட 2 மடங்கு வரை மட்டுமே.
+ஆனால் வருடத்துக்கு 2–3 நாட்களில் move 3 மடங்குக்கு மேல் போகிறது. Seller-க்கு
+உண்மையான ஆபத்து இந்த சில நாட்களில் தான்.</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>Bad பிரிவு (ratio)</th>
+<th>DEV நாட்கள்</th>
+<th>DEV % (எல்லா நாட்களில்)</th>
+<th>TEST நாட்கள்</th>
+<th>TEST %</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 – 2</td>
+<td>533</td>
+<td>24.1%</td>
+<td>114</td>
+<td>24.5%</td>
+</tr>
+<tr class="even">
+<td>2 – 3</td>
+<td>92</td>
+<td>4.2%</td>
+<td>24</td>
+<td>5.2%</td>
+</tr>
+<tr class="odd">
+<td>3-க்கு மேல்</td>
+<td>24</td>
+<td>1.1%</td>
+<td>7</td>
+<td>1.5%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2026-ல் இதுவரை 3+ நாட்கள் 5. 2–3 மற்றும் 3+ இரண்டும் சேர்த்து 8.8%. இது 11
+வருடங்களில் மிக அதிகம்.</p>
+<p><strong>மோசமான 10 நாட்கள்:</strong></p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>தேதி</th>
+<th>முந்தைய VIX</th>
+<th>VIX சொன்ன move (pts)</th>
+<th>நடந்த move (pts)</th>
+<th>Ratio</th>
+<th>நிகழ்வு</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019-09-20</td>
+<td>15.55</td>
+<td>87</td>
+<td>569</td>
+<td>6.54</td>
+<td>Corporate tax குறைப்பு</td>
+</tr>
+<tr class="even">
+<td>2024-06-04</td>
+<td>20.94</td>
+<td>255</td>
+<td>1,379</td>
+<td>5.41</td>
+<td>தேர்தல் முடிவு நாள்</td>
+</tr>
+<tr class="odd">
+<td>2020-03-12</td>
+<td>31.56</td>
+<td>173</td>
+<td>868</td>
+<td>5.03</td>
+<td>COVID crash</td>
+</tr>
+<tr class="even">
+<td>2025-04-07</td>
+<td>13.76</td>
+<td>165</td>
+<td>743</td>
+<td>4.50</td>
+<td>US tariff crash</td>
+</tr>
+<tr class="odd">
+<td>2020-02-28</td>
+<td>17.77</td>
+<td>108</td>
+<td>432</td>
+<td>3.99</td>
+<td>COVID தொடக்கம்</td>
+</tr>
+<tr class="even">
+<td>2022-02-24</td>
+<td>24.54</td>
+<td>219</td>
+<td>815</td>
+<td>3.72</td>
+<td>Russia–Ukraine போர் தொடக்கம்</td>
+</tr>
+<tr class="odd">
+<td>2020-03-23</td>
+<td>67.10</td>
+<td>307</td>
+<td>1,135</td>
+<td>3.70</td>
+<td>COVID crash</td>
+</tr>
+<tr class="even">
+<td>2020-03-09</td>
+<td>25.64</td>
+<td>147</td>
+<td>538</td>
+<td>3.65</td>
+<td>COVID crash</td>
+</tr>
+<tr class="odd">
+<td>2019-09-23</td>
+<td>15.40</td>
+<td>91</td>
+<td>326</td>
+<td>3.59</td>
+<td>Tax குறைப்பு, அடுத்த நாள்</td>
+</tr>
+<tr class="even">
+<td>2021-02-01</td>
+<td>25.34</td>
+<td>181</td>
+<td>647</td>
+<td>3.58</td>
+<td>Union Budget</td>
+</tr>
+</tbody>
+</table></div>
+<p>இந்த நாட்களில் இரண்டு வகை இருக்கிறது:</p>
+<ol type="1">
+<li><p><strong>முன்பே தெரிந்த தேதிகள்:</strong> தேர்தல் முடிவு,
+Budget.</p></li>
+<li><p><strong>திடீர் செய்திகள்:</strong> Tax குறைப்பு, COVID, போர்,
+tariff.</p></li>
+</ol>
+<p>கவனிக்க வேண்டியது: 2019-09-20 அன்று VIX 15.55, 2025-04-07 அன்று VIX
+13.76. VIX குறைவாக இருந்தது, ஆனாலும் பெரிய move வந்தது. VIX குறைவாக இருப்பது
+பாதுகாப்பு அல்ல.</p>
+<h2>சோதனை 3: Edge-ஐ cost
+சாப்பிடுகிறது</h2>
+<p>முடிவு: Option selling-ல் edge இருக்கிறது. ஆனால் DEV காலத்தில் ஒரு
+trade-க்கு edge 3.6 points, cost 4 points. Cost கழித்தால் 9 வருடம் மொத்தமாக
+−963 points.</p>
+<p><strong>சோதனை முறை:</strong></p>
+<ol type="1">
+<li><p>ஒவ்வொரு நாளும் close-ல், NIFTY-க்கு அருகில் உள்ள ATM strike, அடுத்து
+வரும் expiry.</p></li>
+<li><p>CE + PE இரண்டையும் விற்பதாகக் கணக்கு. அடுத்த நாள் close-ல் திரும்ப
+வாங்குவதாகக் கணக்கு.</p></li>
+<li><p>P&amp;L = விற்ற premium − திரும்ப வாங்கிய விலை − 4 points cost.
+எல்லாம் 1 unit-க்கு points-ல்.</p></li>
+</ol>
+<p><img src="money-structure-2.png" alt="" loading="lazy" style="width:100%;height:auto;border-radius:10px;border:1px solid #5a4330;margin-top:14px;background:#fff"></p>
+<p>VPS data · NSE F&amp;O bhavcopy + daily_rows.csv · DEV 2016–2024,
+2,208 trades</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>காலம்</th>
+<th>Trades</th>
+<th>மொத்த P&amp;L</th>
+<th>Win rate</th>
+<th>சராசரி லாபம் / நஷ்டம்</th>
+<th>மோசமான நாள்</th>
+<th>Max drawdown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DEV (2016–2024)</td>
+<td>2,208</td>
+<td>−962.7</td>
+<td>59.6%</td>
+<td>+28.9 / −43.8</td>
+<td>−844.1 (2024-06-04)</td>
+<td>−3,115.1</td>
+</tr>
+<tr class="even">
+<td>TEST (2025 – Sep 2026)</td>
+<td>432</td>
+<td>+2,226.1</td>
+<td>65.5%</td>
+<td>+48.1 / −76.4</td>
+<td>−535.2 (2025-05-12)</td>
+<td>−1,406.5</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Cost எவ்வளவு முக்கியம் (DEV):</strong></p>
+<ol type="1">
+<li><p>Cost-க்கு முன் மொத்த லாபம் = −962.7 + (2,208 × 4) = +7,869 points.
+ஒரு trade-க்கு 3.6 points.</p></li>
+<li><p>Cost 3 points என்றால்: சுமார் +1,245 points.</p></li>
+<li><p>Cost 5 points என்றால்: சுமார் −3,171 points.</p></li>
+</ol>
+<p>ஒரு point cost வித்தியாசத்திலேயே முடிவு மாறுகிறது. இது தான் நான்காவது
+அமைப்பின் (speed + குறைந்த cost) முக்கியத்துவம். பெரிய நிறுவனம் spread-ஐக்
+கொடுப்பதில்லை, அதைச் சம்பாதிக்கிறது. அதனால் அதே 3.6 points edge அவர்களுக்கு
+லாபம், நமக்கு நஷ்டம்.</p>
+<p>வருட வாரியாக, 11 வருடங்களில் 6 மட்டுமே லாபம். TEST லாபத்தில் 1,849 points
+2025-ல் மட்டும் வந்தது. இது நிலையான strategy இல்லை.</p>
+<h2>சோதனை 4: 5Fingers — 27% win
+rate-ல் லாபம்</h2>
+<p>முடிவு: 5Fingers (5F) direction-ஐ சரியாகக் கணிப்பதால் லாபம் எடுக்கவில்லை.
+நஷ்டத்தைச் சிறியதாக வைத்து, பெரிய move நாளில் 14:49 வரை உள்ளே இருக்கும் அமைப்பால்
+லாபம் எடுக்கிறது. 375 trades, cost (6 points) கழித்த பிறகு மொத்தம் +2,869
+points.</p>
+<p><strong>எண்கள்:</strong></p>
+<ol type="1">
+<li><p>Win rate 27% மட்டும்.</p></li>
+<li><p>சராசரி லாபம் +104.5, சராசரி நஷ்டம் −28.5. ஒரு லாபம் சுமார் 3.7 நஷ்டங்களை
+ஈடுகட்டுகிறது.</p></li>
+<li><p>ஒரு trade-க்கு net = 2,869 ÷ 375 = +7.7 points.</p></li>
+</ol>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>Exit வகை</th>
+<th>Trades</th>
+<th>மொத்த P&amp;L (pts)</th>
+<th>ஒரு trade-க்கு</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>14:49 time exit</td>
+<td>140</td>
+<td>+8,589</td>
+<td>+61.4</td>
+</tr>
+<tr class="even">
+<td>Breakeven (BE)</td>
+<td>199</td>
+<td>−1,194</td>
+<td>−6.0</td>
+</tr>
+<tr class="odd">
+<td>Stop loss (SL)</td>
+<td>36</td>
+<td>−4,525</td>
+<td>−125.7</td>
+</tr>
+</tbody>
+</table></div>
+<p>இந்த table-ல் தான் 5F-ன் அமைப்பு தெரிகிறது:</p>
+<ol type="1">
+<li><p>தவறான trades-ல் பெரும்பாலானவை (199) BE-ல் முடிகின்றன. ஒரு trade-க்கு
+நஷ்டம் cost அளவு (−6) மட்டும்.</p></li>
+<li><p>உண்மையான நஷ்டம் 36 SL trades-ல் மட்டும், அதாவது சுமார் 10%.</p></li>
+<li><p>மொத்த லாபமும் 140 time-exit trades-லிருந்து வருகிறது. 2025–26-ல் MFE
+≥ 100 போன 68 trades எல்லாமே லாபம். MFE &lt; 30 உள்ள 18 trades SL-ல் முடிந்தன
+(−1,927).</p></li>
+</ol>
+<p>எச்சரிக்கை: 2022–24-ல் 5F-ன் மொத்த PF 0.95. அந்த 3 வருடங்களில் 5F சிறிய நஷ்டம்.</p>
+<h2>இரண்டு பக்கங்கள்</h2>
+<p>Option seller-க்கு எந்த நாட்கள் ஆபத்தோ, அதே வகை நாட்களில் தான் 5F
+சம்பாதிக்கிறது: எதிர்பாராத பெரிய move. இரண்டும் ஒரே அமைப்பின் இரண்டு
+பக்கங்கள்.</p>
+<div class="tablewrap"><table>
+
+<thead>
+<tr class="header">
+<th>நாள் வகை</th>
+<th>Option seller (ATM straddle)</th>
+<th>5Fingers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>அமைதியான நாள்</td>
+<td>லாபம்: Good நாட்களில் சராசரி +26.7 pts</td>
+<td>சிறிய நஷ்டம்: BE-ல் சராசரி −6 pts</td>
+</tr>
+<tr class="even">
+<td>பெரிய move நாள்</td>
+<td>பெரிய நஷ்டம்: 3+ நாட்களில் சராசரி −330 pts</td>
+<td>பெரிய லாபம்: 14:49 exit-ல் சராசரி +61 pts</td>
+</tr>
+<tr class="odd">
+<td>இரவு gap</td>
+<td>Position இரவில் திறந்திருக்கிறது</td>
+<td>15:15-க்குள் square-off, gap risk இல்லை</td>
+</tr>
+<tr class="even">
+<td>பணம் யாரிடமிருந்து</td>
+<td>Option buyer கொடுக்கும் அதிக premium</td>
+<td>பெரிய move-ஐ எதிர்பாராத பக்கம்</td>
+</tr>
+<tr class="odd">
+<td>லாபத்தின் வடிவம்</td>
+<td>அடிக்கடி சிறிய லாபம், அரிதாக பெரிய நஷ்டம்</td>
+<td>அடிக்கடி சிறிய நஷ்டம், அரிதாக பெரிய லாபம்</td>
+</tr>
+<tr class="even">
+<td>Win rate</td>
+<td>59.6% (DEV)</td>
+<td>27%</td>
+</tr>
+</tbody>
+</table></div>
+<p>இரண்டு பக்கங்களிலும் லாபம் எடுக்க முடியும். ஆனால் ஒவ்வொன்றுக்கும் ஒரு நிபந்தனை
+உண்டு:</p>
+<ol type="1">
+<li><p><strong>Seller:</strong> அரிதான பெரிய நாளில் பிழைக்க hedge, சரியான
+position size, மிகக் குறைந்த cost மூன்றும் தேவை. பெரிய நிறுவனங்களிடம் மூன்றும்
+இருக்கின்றன.</p></li>
+<li><p><strong>5F:</strong> தொடர்ச்சியான சிறிய நஷ்டங்களை மனதால் தாங்க வேண்டும்.
+100 trades-ல் 73 trades லாபம் தராது. பெரிய move நாளில் முன்பே வெளியேறினால்
+மொத்த லாபமும் போய்விடும்.</p></li>
+</ol>
+<p>குறிப்பு: இந்த ஒப்பீடு அமைப்பு ரீதியானது. ஒரே தேதிகளில் seller P&amp;L-ஐயும்
+5F P&amp;L-ஐயும் நேரடியாக இணைத்து இன்னும் சோதிக்கவில்லை.</p>
+<h2>சாதாரண trader-க்கான பாடங்கள்</h2>
+<p>நான்கு சோதனைகளிலிருந்தும் ஏழு பாடங்கள் கிடைக்கின்றன. இவை எந்த strategy-க்கும்
+பொருந்தும்.</p>
+<ol type="1">
+<li><p><strong>கேள்வியை மாற்றுங்கள்.</strong> ஒரு strategy-ஐ backtest
+செய்வதற்கு முன், "இதில் பணம் யாரிடமிருந்து வருகிறது, ஏன்?" என்று ஒரு வரியில்
+எழுதுங்கள். பதில் இல்லையென்றால், அந்த backtest-ன் லாபம் தற்செயலாக வந்ததாக இருக்க
+வாய்ப்பு அதிகம்.</p></li>
+<li><p><strong>Win rate சதவீதம் மட்டும் போதாது.</strong> Straddle Win rate
+59.6%, ஆனால் நஷ்டம். 5F Win rate 27%, ஆனால் லாபம். சராசரி லாபம், சராசரி நஷ்டம்
+இரண்டையும் சேர்த்துத் தான் பார்க்க வேண்டும்.</p></li>
+<li><p><strong>Cost-ஐ முதலில் கணக்கிடுங்கள்.</strong> ஒரு trade-க்கு edge
+எவ்வளவு, cost எவ்வளவு என்று ஒப்பிடுங்கள். Straddle-ல் edge 3.6, cost 4. அதுவே
+முழு முடிவையும் தீர்மானித்தது.</p></li>
+<li><p><strong>மோசமான நாளை முதலில் அளவிடுங்கள்.</strong> 9 வருடத்தில் 23
+நாட்கள் −7,584 points. அந்த நாளில் நீங்கள் பிழைக்க முடியுமா என்பது தான் முதல்
+கேள்வி.</p></li>
+<li><p><strong>சராசரியை மட்டும் நம்பாதீர்கள்.</strong> முடிவுகளை Good /
+Neutral / Bad என்றும், காலம் வாரியாகவும் பிரித்துப் பாருங்கள். மொத்த PF 1.37
+என்றாலும், 5F 2022–24-ல் PF 0.95.</p></li>
+<li><p><strong>எல்லா data-வையும் பார்த்த பிறகு கண்டுபிடித்த filter-ஐ உடனே
+பயன்படுத்தாதீர்கள்.</strong> DEV, TEST என்று பிரியுங்கள். TEST-ஐ ஒரு முறை மட்டும்
+பாருங்கள். புதிய filter-ஐ shadow பதிவாக முதலில் சோதியுங்கள்.</p></li>
+<li><p><strong>உங்களால் செய்ய முடியாத அமைப்புகளை விட்டுவிடுங்கள்.</strong>
+Speed, size, மிகக் குறைந்த cost தேவையான அமைப்புகளில் retail trader போட்டியிட
+முடியாது. நேரம், விலை மாற்றம், risk அமைப்பு மூலம் வரும் edge-ஐ
+தேடுங்கள்.</p></li>
+</ol>
+<h2>வரம்புகள்</h2>
+<ol type="1">
+<li><p>Straddle சோதனை bhavcopy close விலையைப் பயன்படுத்துகிறது. உண்மையான
+fill வேறுபடலாம்.</p></li>
+<li><p>Cost 4 points என்பது தோராயமான எண். முடிவு இந்த எண்ணைப் பொறுத்து
+மாறும்.</p></li>
+<li><p>Margin, capital, lot size எதுவும் கணக்கில் இல்லை. எல்லாம் 1 unit-க்கு
+points.</p></li>
+<li><p>Straddle P&amp;L-ம் 5F P&amp;L-ம் ஒரே தேதிகளில் நேரடியாக இணைத்துச்
+சோதிக்கப்படவில்லை.</p></li>
+<li><p>Jane Street விவரங்கள் SEBI interim order-ன் குற்றச்சாட்டுகள், இறுதித்
+தீர்ப்பு அல்ல.</p></li>
+</ol>
+<h2>ஆதாரங்கள்</h2>
+<ul>
+<li><p><a
+href="https://taxguru.in/sebi/sebi-study-shows-93-percent-individual-fo-traders-incur-losses.html">SEBI
+study FY22–FY24 summary (TaxGuru)</a></p></li>
+<li><p><a href="https://taxguru.in/?p=931956">SEBI Press Release 22/2024
+(TaxGuru)</a></p></li>
+<li><p><a
+href="https://www.outlookbusiness.com/markets/sebis-action-against-jane-street-a-turning-point-for-fpis-and-algo-trading-in-india">Jane
+Street: SEBI order details (Outlook Business)</a></p></li>
+<li><p><a href="https://www.brecorder.com/news/amp/40371851">Jane
+Street: India strategy (Business Recorder)</a></p></li>
+<li><p>Math by Thomas VPS research: vix_vs_actual.py, bad_days.py,
+straddle_pnl.py (17-Nov-2026)</p></li>
+</ul>
+<p><strong>கல்வி நோக்கத்திற்கு மட்டும்.</strong> இது முதலீட்டு ஆலோசனை அல்ல.
+Entry, target, stop-loss எதுவும் வழங்கப்படவில்லை. ஆசிரியர் SEBI-யில் பதிவு
+செய்யப்பட்டவர் அல்ல. Derivatives trading-ல் மூலதனம் முழுவதும் இழக்கூடும்.</p>
+<p>Math by Thomas — Pure AMT — No Magic, Just Math.</p>
+
+</article>
+</main>
+<footer class="wrap">
+  <nav><a href="5-fingers.html">5 Fingers</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="risk.html">Risk &amp; Expectations</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+  <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
+  Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
+  <p class="disc">© 2026 Math by Thomas · India</p>
+</footer>
+</body>
+</html>

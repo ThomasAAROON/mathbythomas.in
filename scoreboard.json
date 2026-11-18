@@ -1,0 +1,634 @@
+{
+ "start": "2026-10-07",
+ "last_day": "2026-11-18",
+ "updated": "2026-11-18 16:05 IST",
+ "summary": {
+  "trading_days": 29,
+  "signal_days": 22,
+  "no_signal_days": 7,
+  "profit_days": 11,
+  "profit_pts": 2871.2,
+  "loss_days": 9,
+  "loss_pts": -755.2,
+  "be_days": 2,
+  "total": 2116.0,
+  "trades": 31,
+  "best_day": {
+   "date": "2026-10-15",
+   "pts": 646.8
+  },
+  "worst_day": {
+   "date": "2026-11-09",
+   "pts": -126.7
+  },
+  "max_dd": -273.7,
+  "pf": 3.8,
+  "win_rate": 50
+ },
+ "signals": [
+  {
+   "key": "5F",
+   "name": "5 Fingers",
+   "experimental": false,
+   "trades": 9,
+   "win": 4,
+   "be": 5,
+   "loss": 0,
+   "pts": 1041.0,
+   "pf": null,
+   "win_rate": 44,
+   "best": 315.7,
+   "worst": 0.0
+  },
+  {
+   "key": "PDHL",
+   "name": "PDH / PDL break",
+   "experimental": true,
+   "trades": 14,
+   "win": 7,
+   "be": 0,
+   "loss": 7,
+   "pts": 492.0,
+   "pf": 1.94,
+   "win_rate": 50,
+   "best": 287.3,
+   "worst": -105.2
+  },
+  {
+   "key": "ORB30",
+   "name": "ORB 30",
+   "experimental": true,
+   "trades": 8,
+   "win": 5,
+   "be": 0,
+   "loss": 3,
+   "pts": 583.0,
+   "pf": 3.41,
+   "win_rate": 62,
+   "best": 285.2,
+   "worst": -126.7
+  },
+  {
+   "key": "EU_RISKOFF",
+   "name": "Europe Risk-off",
+   "experimental": true,
+   "trades": 0,
+   "win": 0,
+   "be": 0,
+   "loss": 0,
+   "pts": 0.0,
+   "pf": null,
+   "win_rate": null,
+   "best": null,
+   "worst": null
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-10-07",
+   "s": {
+    "5F": 0.0,
+    "PDHL": null,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 0.0,
+   "cum": 0.0,
+   "manual": false
+  },
+  {
+   "date": "2026-10-08",
+   "s": {
+    "5F": 315.7,
+    "PDHL": null,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 315.7,
+   "cum": 315.7,
+   "manual": false
+  },
+  {
+   "date": "2026-10-09",
+   "s": {
+    "5F": 235.4,
+    "PDHL": null,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 235.4,
+   "cum": 551.1,
+   "manual": false
+  },
+  {
+   "date": "2026-10-13",
+   "s": {
+    "5F": 244.6,
+    "PDHL": null,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 244.6,
+   "cum": 795.7,
+   "manual": false
+  },
+  {
+   "date": "2026-10-14",
+   "s": {
+    "5F": null,
+    "PDHL": -88.0,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -88.0,
+   "cum": 707.7,
+   "manual": true
+  },
+  {
+   "date": "2026-10-15",
+   "s": {
+    "5F": 245.3,
+    "PDHL": 212.2,
+    "ORB30": 189.3,
+    "EU_RISKOFF": null
+   },
+   "total": 646.8,
+   "cum": 1354.5,
+   "manual": false
+  },
+  {
+   "date": "2026-10-19",
+   "s": {
+    "5F": null,
+    "PDHL": null,
+    "ORB30": 107.1,
+    "EU_RISKOFF": null
+   },
+   "total": 107.1,
+   "cum": 1461.6,
+   "manual": false
+  },
+  {
+   "date": "2026-10-21",
+   "s": {
+    "5F": 0.0,
+    "PDHL": 181.7,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 181.7,
+   "cum": 1643.3,
+   "manual": false
+  },
+  {
+   "date": "2026-10-22",
+   "s": {
+    "5F": 0.0,
+    "PDHL": -95.3,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -95.3,
+   "cum": 1547.9,
+   "manual": false
+  },
+  {
+   "date": "2026-10-23",
+   "s": {
+    "5F": null,
+    "PDHL": 58.8,
+    "ORB30": 168.0,
+    "EU_RISKOFF": null
+   },
+   "total": 226.8,
+   "cum": 1774.8,
+   "manual": true
+  },
+  {
+   "date": "2026-10-26",
+   "s": {
+    "5F": 0.0,
+    "PDHL": null,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 0.0,
+   "cum": 1774.8,
+   "manual": false
+  },
+  {
+   "date": "2026-10-27",
+   "s": {
+    "5F": null,
+    "PDHL": -0.3,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -0.3,
+   "cum": 1774.5,
+   "manual": false
+  },
+  {
+   "date": "2026-10-28",
+   "s": {
+    "5F": null,
+    "PDHL": -98.3,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -98.3,
+   "cum": 1676.1,
+   "manual": false
+  },
+  {
+   "date": "2026-10-29",
+   "s": {
+    "5F": 0.0,
+    "PDHL": 158.8,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": 158.8,
+   "cum": 1834.9,
+   "manual": false
+  },
+  {
+   "date": "2026-11-02",
+   "s": {
+    "5F": null,
+    "PDHL": null,
+    "ORB30": -105.2,
+    "EU_RISKOFF": null
+   },
+   "total": -105.2,
+   "cum": 1729.7,
+   "manual": false
+  },
+  {
+   "date": "2026-11-04",
+   "s": {
+    "5F": null,
+    "PDHL": -94.4,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -94.4,
+   "cum": 1635.3,
+   "manual": false
+  },
+  {
+   "date": "2026-11-06",
+   "s": {
+    "5F": null,
+    "PDHL": 287.3,
+    "ORB30": 285.2,
+    "EU_RISKOFF": null
+   },
+   "total": 572.5,
+   "cum": 2207.9,
+   "manual": false
+  },
+  {
+   "date": "2026-11-09",
+   "s": {
+    "5F": null,
+    "PDHL": null,
+    "ORB30": -126.7,
+    "EU_RISKOFF": null
+   },
+   "total": -126.7,
+   "cum": 2081.2,
+   "manual": false
+  },
+  {
+   "date": "2026-11-13",
+   "s": {
+    "5F": null,
+    "PDHL": -105.2,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -105.2,
+   "cum": 1976.0,
+   "manual": false
+  },
+  {
+   "date": "2026-11-16",
+   "s": {
+    "5F": null,
+    "PDHL": -41.8,
+    "ORB30": null,
+    "EU_RISKOFF": null
+   },
+   "total": -41.8,
+   "cum": 1934.2,
+   "manual": false
+  },
+  {
+   "date": "2026-11-17",
+   "s": {
+    "5F": null,
+    "PDHL": 87.0,
+    "ORB30": 75.4,
+    "EU_RISKOFF": null
+   },
+   "total": 162.4,
+   "cum": 2096.6,
+   "manual": false
+  },
+  {
+   "date": "2026-11-18",
+   "s": {
+    "5F": null,
+    "PDHL": 29.6,
+    "ORB30": -10.2,
+    "EU_RISKOFF": null
+   },
+   "total": 19.4,
+   "cum": 2116.0,
+   "manual": false
+  }
+ ],
+ "trades": [
+  {
+   "date": "2026-10-07",
+   "tool": "5F",
+   "side": "SHORT",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-08",
+   "tool": "5F",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 315.7,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-09",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 235.4,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-13",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 244.6,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-14",
+   "tool": "PDHL",
+   "side": "",
+   "status": "SL",
+   "pts": -88.0,
+   "manual": true,
+   "note": "Missed in live log (data error) - added by hand"
+  },
+  {
+   "date": "2026-10-15",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 245.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-15",
+   "tool": "ORB30",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 189.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-15",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 212.2,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-19",
+   "tool": "ORB30",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 107.1,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-21",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-21",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 181.7,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-22",
+   "tool": "5F",
+   "side": "SHORT",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-22",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "SL",
+   "pts": -95.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-23",
+   "tool": "ORB30",
+   "side": "",
+   "status": "EXIT_1450",
+   "pts": 168.0,
+   "manual": true,
+   "note": "Missed in live log (data error) - added by hand"
+  },
+  {
+   "date": "2026-10-23",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 58.8,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-26",
+   "tool": "5F",
+   "side": "SHORT",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-27",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": -0.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-28",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "SL",
+   "pts": -98.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-29",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-10-29",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 158.8,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-02",
+   "tool": "ORB30",
+   "side": "LONG",
+   "status": "SL",
+   "pts": -105.2,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-04",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "SL",
+   "pts": -94.4,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-06",
+   "tool": "ORB30",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 285.2,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-06",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 287.3,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-09",
+   "tool": "ORB30",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": -126.7,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-13",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "SL",
+   "pts": -105.2,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-16",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": -41.8,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-17",
+   "tool": "ORB30",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 75.4,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-17",
+   "tool": "PDHL",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 87.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-18",
+   "tool": "ORB30",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": -10.2,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-18",
+   "tool": "PDHL",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 29.6,
+   "manual": false,
+   "note": ""
+  }
+ ],
+ "note": "Nifty 50 points before costs. Sum of all signals each day. Dagger = trade missed in the live log because of a data error, added by hand. Experimental tools are marked."
+}

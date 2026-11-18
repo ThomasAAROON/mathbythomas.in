@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Math by Thomas</title>
+<meta name="description" content="Math by Thomas — Auction Market Theory, Market Profile and the 5 Fingers indicator for Nifty 50, explained in Tamil. Educational purpose only.">
+<meta property="og:title" content="Math by Thomas">
+<meta property="og:description" content="Math by Thomas — Auction Market Theory, Market Profile and the 5 Fingers indicator for Nifty 50, explained in Tamil. Educational purpose only.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mathbythomas.in/">
+<meta property="og:image" content="https://mathbythomas.in/5fingers-1month.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+/* Layout: sticky slim header · two-column hero (thesis left, live Market Profile right) · "now" rail · record ledger · product + bundle · contact */
+:root{
+  --bg:#1a120b; --surface:#251a11; --raise:#302217; --line:#46331f;
+  --gold:#e8c880; --gold-d:#c9a24e; --cream:#f7efe0; --muted:#b8a68c;
+  --pos:#7fd89a; --neg:#ef7b6e;
+  --f-display:'Anek Tamil','Noto Sans Tamil','Noto Sans',system-ui,sans-serif;
+  --f-body:'Noto Sans','Noto Sans Tamil',system-ui,sans-serif;
+  --f-num:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--cream);font-family:var(--f-body);font-size:17px;line-height:1.65;margin:0}
+a{color:var(--gold)}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ta{font-family:'Noto Sans Tamil',var(--f-body);color:var(--muted);font-size:15.5px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:700}
+h3{font-size:20px;font-weight:600}
+p{margin:0}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.pos{color:var(--pos)!important}.neg{color:var(--neg)!important}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream);flex:none}
+.brand img{width:38px;height:38px}
+.brand b{font-family:var(--f-display);font-size:19px;letter-spacing:.2px}
+nav.main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{flex:none;text-decoration:none;color:var(--muted);font-size:14.5px;padding:6px 10px;border-radius:8px}
+nav.main a:hover{color:var(--cream);background:var(--surface)}
+nav.main a.on{color:var(--bg);background:var(--gold);font-weight:600}
+@media (max-width:760px){header.top .wrap{flex-wrap:wrap;gap:6px}nav.main{margin-left:0;width:100%}}
+
+/* buttons */
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a120b;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:10px;font-size:16px;transition:transform .15s ease,background .15s ease}
+.btn:hover{background:#f2d79a;transform:translateY(-1px)}
+.btn.alt{background:transparent;color:var(--gold);border:1px solid var(--gold-d)}
+.btn.alt:hover{background:var(--surface)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding-block:56px 40px}
+.eyebrow{font-family:var(--f-num);font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-d)}
+.hero h1{font-size:clamp(38px,5.6vw,64px);font-weight:800;margin-top:14px;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lead{font-size:clamp(18px,1.9vw,21px);margin-top:18px;max-width:34em}
+.hero .ta{margin-top:8px;max-width:38em}
+.hero .cta{margin-top:26px}
+.profile{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 12px}
+.profile svg{width:100%;height:auto;display:block}
+.profile .px{font-family:var(--f-num);font-size:10px;fill:var(--muted)}
+.profile .t{font-family:var(--f-num);font-size:13px;font-weight:600}
+.profile .out{fill:#6e5a43}.profile .va{fill:var(--cream)}.profile .poc{fill:var(--bg)}
+.profile .pocband{fill:var(--gold)}
+.profile .varail{fill:var(--gold-d)}
+.profile .lbl{font-family:var(--f-num);font-size:9.5px;letter-spacing:1px;fill:var(--gold)}
+.profile figcaption{font-size:13px;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr);gap:30px;padding-block:36px 28px}}
+
+/* now rail */
+.now{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.now a{display:flex;flex-direction:column;gap:6px;padding:16px 18px;text-decoration:none;color:var(--cream);background:var(--surface);border-right:1px solid var(--line);min-width:0}
+.now a:last-child{border-right:0}
+.now a:hover{background:var(--raise)}
+.chip{align-self:flex-start;font-family:var(--f-num);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--gold-d);color:var(--gold)}
+.chip.live{border-color:var(--pos);color:var(--pos)}
+.now b{font-family:var(--f-display);font-size:17px;line-height:1.3}
+.now span{font-size:13.5px;color:var(--muted)}
+@media (max-width:860px){.now{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.now a:nth-child(2n){border-right:0}.now a:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:480px){.now{grid-template-columns:minmax(0,1fr)}.now a{border-right:0;border-bottom:1px solid var(--line)}.now a:last-child{border-bottom:0}}
+.bf{margin-top:14px}
+.bf img{display:block;width:100%;max-width:728px;height:auto;border-radius:8px}
+@media (max-width:600px){.bf img{max-width:300px}}
+
+/* sections */
+section{padding-block:56px 8px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head .ta{margin-top:6px}
+
+/* record */
+.record{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
+.big{background:linear-gradient(160deg,#3a2817,#241910);border:1px solid var(--gold-d);border-radius:18px;padding:26px}
+.big .k{font-size:14px;color:var(--muted)}
+.big .v{font-family:var(--f-num);font-size:clamp(44px,6vw,64px);font-weight:600;color:var(--pos);line-height:1.1;margin-top:6px;letter-spacing:-1px}
+.big .v small{font-size:18px;color:var(--muted);font-weight:400;letter-spacing:0}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:20px}
+.tiles div{background:#2a1d12;padding:14px}
+.tiles b{display:block;font-family:var(--f-num);font-size:22px;font-weight:600}
+.tiles span{font-size:13px;color:var(--muted)}
+.big img{width:100%;border-radius:12px;margin-top:20px;display:block}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.kv th{text-align:right;font-family:var(--f-num);font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+table.kv tr.total td,table.kv tr.total th{border-top:2px solid var(--gold-d);font-weight:700;color:var(--cream)}
+table.grid thead th{color:var(--gold);font-weight:600;background:var(--surface);font-size:14px}
+table.grid td.n,table.grid th.n{font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right}
+.note{font-size:14px;color:var(--muted);margin-top:12px;max-width:62em}
+@media (max-width:860px){.record{grid-template-columns:minmax(0,1fr)}}
+
+/* what we do */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.three div{border-top:2px solid var(--gold-d);padding-top:16px;min-width:0}
+.three p{margin-top:8px}
+.three .ta{margin-top:6px}
+@media (max-width:760px){.three{grid-template-columns:minmax(0,1fr);gap:22px}}
+
+/* product */
+.product{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px}
+.product ul,.price ul{margin:14px 0 0;padding-left:20px}
+.product li,.price li{margin-top:6px}
+.product .cta{margin-top:20px}
+.facts{display:grid;gap:10px;align-content:start}
+.facts div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px;font-size:15px}
+.facts span{color:var(--muted)}
+@media (max-width:760px){.product{grid-template-columns:minmax(0,1fr);padding:22px}}
+
+/* bundle */
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ind{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.ind .tag{font-family:var(--f-num);font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-d)}
+.ind h3{margin-top:6px}
+.ind p{font-size:15px;margin-top:8px;color:#e6dccb}
+@media (max-width:960px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.four{grid-template-columns:minmax(0,1fr)}}
+.price{margin-top:18px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px;background:linear-gradient(160deg,#3a2817,#241910);border:1px solid var(--gold-d);border-radius:18px;padding:28px}
+.amt{font-family:var(--f-num);font-size:clamp(40px,5vw,54px);font-weight:600;color:var(--gold);line-height:1.1}
+.amt small{display:block;font-family:var(--f-body);font-size:15px;color:var(--muted);font-weight:400;margin-top:6px}
+.price .cta{margin-top:18px}
+@media (max-width:760px){.price{grid-template-columns:minmax(0,1fr);padding:22px}}
+
+/* contact */
+.contact{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border:1px solid var(--line);border-radius:18px;padding:28px;background:var(--surface)}
+.contact .cta{margin-top:0}
+
+footer{border-top:1px solid var(--line);margin-top:56px;padding-block:28px 44px;color:var(--muted);font-size:14px}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+footer nav a{color:var(--cream);text-decoration:none}
+footer nav a:hover{color:var(--gold)}
+footer .disc{margin-top:14px;max-width:70em}
+
+
+/* scoreboard */
+.chartbox{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 12px 8px}
+.chartbox svg{width:100%;height:auto;display:block}
+.chartbox .grid{stroke:var(--line);stroke-width:1}
+.chartbox .zero{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.chartbox .ax{font-family:var(--f-num);font-size:11px;fill:var(--muted)}
+.chartbox .line{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linejoin:round}
+.chartbox .area{fill:var(--gold);opacity:.12}
+.chartbox .dot{fill:var(--gold);stroke:var(--bg);stroke-width:2}
+.ind .pts{font-family:var(--f-num);font-size:30px;font-weight:600;margin-top:10px;color:var(--cream)}
+.ind .pts small{font-family:var(--f-body);font-size:13px;color:var(--muted);font-weight:400}
+.ind dl{margin:12px 0 0;display:grid;gap:6px}
+.ind dl div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:5px;font-size:14px}
+.ind dt{color:var(--muted)}.ind dd{margin:0;font-family:var(--f-num);font-variant-numeric:tabular-nums}
+table.daily td,table.daily th{white-space:nowrap}
+table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right}
+.tiles.wide{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:760px){.tiles.wide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:no-preference){
+  .profile .va,.profile .poc{animation:rise .7s ease both}
+}
+@keyframes rise{from{opacity:.35}to{opacity:1}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="logo.svg" width="38" height="38" alt=""><b>Math by Thomas</b></a>
+    <nav class="main"><a href="index.html" class="on">Home</a><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Nifty 50 · Market Profile · தமிழில்</p>
+      <h1>Pure AMT.<br>No Magic, <em>Just Math.</em></h1>
+      <p class="lead">Auction Market Theory, Market Profile and data-tested rules for Nifty 50, explained in Tamil.</p>
+      <p class="ta">Auction Market Theory, Market Profile மற்றும் data-வில் சோதிக்கப்பட்ட விதிகள் — தமிழில்.</p>
+      <div class="cta">
+        <a class="btn" href="5-fingers.html">Explore 5 Fingers →</a>
+        <a class="btn alt" href="scoreboard.html">Daily scoreboard</a>
+      </div>
+    </div>
+    <figure class="profile" style="margin:0">
+      <svg viewBox="0 0 320 375" role="img" aria-label="Market Profile: price levels with time letters, point of control and value area"><rect x="72" y="179" width="193" height="18" rx="4" class="pocband"/><rect x="64" y="102" width="3" height="171" rx="1.5" class="varail"/><text x="2" y="22" class="px">25,480</text><text x="78" y="22" class="t out">B</text><text x="95" y="22" class="t out">C</text><text x="2" y="41" class="px">25,460</text><text x="78" y="41" class="t out">A</text><text x="95" y="41" class="t out">B</text><text x="112" y="41" class="t out">C</text><text x="2" y="60" class="px">25,440</text><text x="78" y="60" class="t out">A</text><text x="95" y="60" class="t out">B</text><text x="112" y="60" class="t out">C</text><text x="129" y="60" class="t out">D</text><text x="2" y="79" class="px">25,420</text><text x="78" y="79" class="t out">B</text><text x="95" y="79" class="t out">C</text><text x="112" y="79" class="t out">D</text><text x="129" y="79" class="t out">E</text><text x="146" y="79" class="t out">F</text><text x="2" y="98" class="px">25,400</text><text x="78" y="98" class="t out">A</text><text x="95" y="98" class="t out">B</text><text x="112" y="98" class="t out">C</text><text x="129" y="98" class="t out">D</text><text x="146" y="98" class="t out">E</text><text x="163" y="98" class="t out">F</text><text x="180" y="98" class="t out">G</text><text x="2" y="117" class="px">25,380</text><text x="78" y="117" class="t va">A</text><text x="95" y="117" class="t va">B</text><text x="112" y="117" class="t va">C</text><text x="129" y="117" class="t va">D</text><text x="146" y="117" class="t va">E</text><text x="163" y="117" class="t va">F</text><text x="180" y="117" class="t va">G</text><text x="197" y="117" class="t va">H</text><text x="2" y="136" class="px">25,360</text><text x="78" y="136" class="t va">B</text><text x="95" y="136" class="t va">C</text><text x="112" y="136" class="t va">D</text><text x="129" y="136" class="t va">E</text><text x="146" y="136" class="t va">F</text><text x="163" y="136" class="t va">G</text><text x="180" y="136" class="t va">H</text><text x="197" y="136" class="t va">I</text><text x="214" y="136" class="t va">J</text><text x="231" y="136" class="t va">K</text><text x="2" y="155" class="px">25,340</text><text x="78" y="155" class="t va">A</text><text x="95" y="155" class="t va">B</text><text x="112" y="155" class="t va">C</text><text x="129" y="155" class="t va">D</text><text x="146" y="155" class="t va">E</text><text x="163" y="155" class="t va">F</text><text x="180" y="155" class="t va">G</text><text x="197" y="155" class="t va">H</text><text x="214" y="155" class="t va">I</text><text x="231" y="155" class="t va">J</text><text x="248" y="155" class="t va">K</text><text x="2" y="174" class="px">25,320</text><text x="78" y="174" class="t va">A</text><text x="95" y="174" class="t va">B</text><text x="112" y="174" class="t va">C</text><text x="129" y="174" class="t va">D</text><text x="146" y="174" class="t va">E</text><text x="163" y="174" class="t va">F</text><text x="180" y="174" class="t va">G</text><text x="197" y="174" class="t va">H</text><text x="214" y="174" class="t va">I</text><text x="231" y="174" class="t va">J</text><text x="248" y="174" class="t va">K</text><text x="2" y="193" class="px">25,300</text><text x="78" y="193" class="t poc">B</text><text x="95" y="193" class="t poc">C</text><text x="112" y="193" class="t poc">D</text><text x="129" y="193" class="t poc">E</text><text x="146" y="193" class="t poc">F</text><text x="163" y="193" class="t poc">G</text><text x="180" y="193" class="t poc">H</text><text x="197" y="193" class="t poc">I</text><text x="214" y="193" class="t poc">J</text><text x="231" y="193" class="t poc">K</text><text x="248" y="193" class="t poc">L</text><text x="2" y="212" class="px">25,280</text><text x="78" y="212" class="t va">A</text><text x="95" y="212" class="t va">B</text><text x="112" y="212" class="t va">C</text><text x="129" y="212" class="t va">D</text><text x="146" y="212" class="t va">E</text><text x="163" y="212" class="t va">F</text><text x="180" y="212" class="t va">G</text><text x="197" y="212" class="t va">H</text><text x="214" y="212" class="t va">I</text><text x="231" y="212" class="t va">J</text><text x="248" y="212" class="t va">K</text><text x="2" y="231" class="px">25,260</text><text x="78" y="231" class="t va">A</text><text x="95" y="231" class="t va">B</text><text x="112" y="231" class="t va">C</text><text x="129" y="231" class="t va">D</text><text x="146" y="231" class="t va">E</text><text x="163" y="231" class="t va">F</text><text x="180" y="231" class="t va">G</text><text x="197" y="231" class="t va">H</text><text x="214" y="231" class="t va">I</text><text x="231" y="231" class="t va">J</text><text x="248" y="231" class="t va">K</text><text x="2" y="250" class="px">25,240</text><text x="78" y="250" class="t va">B</text><text x="95" y="250" class="t va">C</text><text x="112" y="250" class="t va">D</text><text x="129" y="250" class="t va">E</text><text x="146" y="250" class="t va">F</text><text x="163" y="250" class="t va">G</text><text x="180" y="250" class="t va">H</text><text x="197" y="250" class="t va">I</text><text x="214" y="250" class="t va">J</text><text x="231" y="250" class="t va">K</text><text x="2" y="269" class="px">25,220</text><text x="78" y="269" class="t va">A</text><text x="95" y="269" class="t va">B</text><text x="112" y="269" class="t va">C</text><text x="129" y="269" class="t va">D</text><text x="146" y="269" class="t va">E</text><text x="163" y="269" class="t va">F</text><text x="180" y="269" class="t va">G</text><text x="197" y="269" class="t va">H</text><text x="2" y="288" class="px">25,200</text><text x="78" y="288" class="t out">A</text><text x="95" y="288" class="t out">B</text><text x="112" y="288" class="t out">C</text><text x="129" y="288" class="t out">D</text><text x="146" y="288" class="t out">E</text><text x="163" y="288" class="t out">F</text><text x="180" y="288" class="t out">G</text><text x="2" y="307" class="px">25,180</text><text x="78" y="307" class="t out">B</text><text x="95" y="307" class="t out">C</text><text x="112" y="307" class="t out">D</text><text x="129" y="307" class="t out">E</text><text x="146" y="307" class="t out">F</text><text x="163" y="307" class="t out">G</text><text x="2" y="326" class="px">25,160</text><text x="78" y="326" class="t out">A</text><text x="95" y="326" class="t out">B</text><text x="112" y="326" class="t out">C</text><text x="129" y="326" class="t out">D</text><text x="2" y="345" class="px">25,140</text><text x="78" y="345" class="t out">A</text><text x="95" y="345" class="t out">B</text><text x="112" y="345" class="t out">C</text><text x="2" y="364" class="px">25,120</text><text x="78" y="364" class="t out">B</text><text x="95" y="364" class="t out">C</text><text x="316" y="193" class="lbl" text-anchor="end">POC</text><text x="316" y="117" class="lbl" text-anchor="end">VALUE AREA</text></svg>
+      <figcaption><span>Market Profile: price × time</span><span>A, B, C… = 30-min periods</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="now">
+      <a href="scoreboard.html"><span class="chip live">Live · daily</span><b>Scoreboard · <span id="sb-rail">—</span> points</b><span>Updated every trading day · losses included →</span></a>
+      <a href="course.html"><span class="chip">New</span><b>Pure Math Trading course</b><span>Live course · Batch 1 registration open →</span></a>
+      <a href="#bundle"><span class="chip">Offer</span><b>4 indicators · ₹23,000</b><span>Bundle offer extended · lifetime access →</span></a>
+      <a href="tradingview-offer.html"><span class="chip">Affiliate</span><b>TradingView Black Friday</b><span>Up to 80% off annual plans · 23 Nov – 2 Dec →</span></a>
+    </div>
+    <p class="bf"><a href="https://www.tradingview.com/black-friday/?aff_id=152629&amp;utm_source=creative&amp;utm_lang=EN" target="_blank" rel="sponsored noopener"><picture><source media="(max-width:600px)" srcset="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/300x250InlineRectangle.jpg 1x, https://s3.tradingview.com/pub/referrals/creatives/BF/EN/600x500InlineRectangle.jpg 2x" width="300" height="250"><img src="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/728x90Leaderboard.jpg" srcset="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/728x90Leaderboard.jpg 1x, https://s3.tradingview.com/pub/referrals/creatives/BF/EN/1456x180Leaderboard.jpg 2x" width="728" height="90" alt="TradingView Black Friday - up to 80% off (affiliate link)" loading="lazy"></picture></a></p>
+  </div>
+
+  <section class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Live record · all signals</h2>
+        <p class="ta">Nifty 50 மட்டும் · <span id="sb-period">07 Oct 2026 –</span> · Nifty points, before costs · நஷ்டம் உட்பட எல்லா முடிவுகளும் · <span id="sb-updated"></span></p>
+      </div>
+      <a href="scoreboard.html">Daily scoreboard →</a>
+    </div>
+    <div class="record">
+      <div class="big">
+        <p class="k">ஒட்டுமொத்த முடிவு · Overall result</p>
+        <p class="v" id="sb-total" data-base="v">— <small>points</small></p>
+        <div class="tiles">
+          <div><b id="sb-days">—</b><span>Signal நாட்கள் / trading days</span></div>
+          <div><b id="sb-pf">—</b><span>Profit factor (லாபம் ÷ நஷ்டம்)</span></div>
+          <div><b id="sb-wr">—</b><span id="sb-wr-n">Win rate</span></div>
+          <div><b id="sb-dd" class="neg" data-base="">—</b><span>Max drawdown</span></div>
+        </div>
+        <img src="5fingers-1month.png" alt="5 Fingers one month live record, 07 October to 06 November 2026" loading="lazy">
+      </div>
+      <div>
+        <div class="tablewrap"><table class="kv" id="sb-kv"></table></div>
+        <h3 style="margin-top:28px">4 signal types · since release</h3>
+        <div class="tablewrap" style="margin-top:10px"><table class="grid">
+          <thead><tr><th>Signal</th><th class="n">Trades</th><th class="n">Points</th><th>Result</th></tr></thead>
+          <tbody id="sb-signals"></tbody>
+        </table></div>
+      </div>
+    </div>
+    <p class="note ta">ஒரு நாளில் வந்த எல்லா signals-உம் (5 Fingers, PDH/PDL, ORB 30, Europe) சேர்த்து அந்த நாளின் முடிவு. † = data பிழையால் Telegram-க்கு வராத signals (14 Oct −88, 23 Oct +168) கையால் சேர்க்கப்பட்டவை. 🔬 = சோதனைக் கருவிகள். குறுகிய காலம் மட்டுமே — எந்த system-ஐயும் மதிப்பிட இது போதாது; இது எதிர்காலக் கணிப்பு அல்ல. தினசரி விவரம் Scoreboard பக்கத்தில், வார விவரம் Scorecards பக்கத்தில்.</p>
+  </section>
+
+  <section class="wrap" id="what">
+    <div class="sec-head"><h2>What we do</h2></div>
+    <div class="three">
+      <div><h3>Market Profile education</h3><p>Auction Market Theory and Market Profile concepts for Tamil-speaking traders, on YouTube and Telegram.</p><p class="ta">தமிழ் traders-க்கு AMT, Market Profile கல்வி.</p></div>
+      <div><h3>TradingView indicators</h3><p>Pine Script indicators built from our own research on ten years of Nifty 50 1-minute data.</p><p class="ta">எங்கள் சொந்த ஆய்வின் அடிப்படையில் உருவான indicators.</p></div>
+      <div><h3>Honest records</h3><p>Every live result is published in a weekly scorecard, losses included.</p><p class="ta">ஒவ்வொரு வெள்ளியும் scorecard — நஷ்டம் உட்பட.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="product">
+      <div>
+        <p class="eyebrow">Nifty 50 intraday tool</p>
+        <h2 style="margin-top:8px">5 Fingers</h2>
+        <p style="margin-top:12px">A Nifty 50 intraday tool that combines a machine-learning model with Market Profile rules. Entry, stop loss and exit time are fixed in advance, and some days are no-trade days by rule.</p>
+        <p class="ta" style="margin-top:8px">Machine Learning + Market Profile. Entry, Stop Loss, Exit நேரம் — எல்லாம் முன்பே நிர்ணயிக்கப்பட்டவை.</p>
+        <div class="cta"><a class="btn" href="5-fingers.html">How it works →</a></div>
+      </div>
+      <div class="facts">
+        <div><span>Platform</span><b>TradingView (invite-only)</b></div>
+        <div><span>Signals</span><b>Live Telegram channel</b></div>
+        <div><span>Record</span><b>Scorecard every Friday</b></div>
+        <div><span>Price</span><b>In the ₹23,000 bundle</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="bundle">
+    <div class="sec-head">
+      <div>
+        <h2>Bundle offer · 4 indicators</h2>
+        <p class="ta">Offer extended — valid <b>until TradingView's new Marketplace terms take effect</b> · one-time payment · lifetime access<br>TradingView-இன் புதிய விதிகள் அமலுக்கு வரும் வரை மட்டும். அதற்கு முன் வாங்கியவர்களின் access தடையின்றித் தொடரும் என்று TradingView தெரிவித்துள்ளது.</p>
+      </div>
+    </div>
+    <div class="four">
+      <div class="ind"><p class="tag">Nifty 50 · 1 / 5-min</p><h3>5 Fingers</h3><p>Machine learning + Market Profile, with live signals from our server on Telegram.</p></div>
+      <div class="ind"><p class="tag">5-min · all instruments</p><h3>Market Profile</h3><p>Value Area, POC and profile levels for your own analysis, on all exchanges.</p></div>
+      <div class="ind"><p class="tag">Nifty · 15-min</p><h3>UYIR</h3><p>For sideways (range) markets. Volatility bands built from India VIX.</p></div>
+      <div class="ind"><p class="tag">NSE options</p><h3>Sigma Shield</h3><p>Strangle strike calculator. Helps option sellers choose far strikes, with a volatility shock check.</p></div>
+    </div>
+    <div class="price">
+      <div>
+        <p class="amt">₹23,000<small>all four · one-time · lifetime</small></p>
+        <div class="cta"><a class="btn" href="https://wa.me/917904211337">WhatsApp Vijay →</a><a class="btn alt" href="https://wa.me/917397755102">WhatsApp Support</a><a class="btn alt" href="policy.html">Sale policy</a></div>
+      </div>
+      <div>
+        <ul style="margin-top:0">
+          <li>All 4 TradingView indicators (invite-only) on one TradingView account</li>
+          <li>5 Fingers live Telegram channel + future updates</li>
+          <li>Free <a href="course.html">Pure Math Trading course</a> with the bundle</li>
+          <li><b>No refund</b> — please study the scorecards and the <a href="risk.html">risk page</a> before you buy</li>
+        </ul>
+        <p class="ta" style="margin-top:10px">4 indicators ₹23,000 — TradingView-இன் புதிய விதிகள் அமலுக்கு வரும் வரை மட்டும். Bundle வாங்கியவர்களுக்கு Pure Math Trading course இலவசம்.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="contact">
+    <div class="contact">
+      <div>
+        <h2>Contact</h2>
+        <p style="margin-top:8px">Call / WhatsApp Vijay or Support, or message Thomas on Telegram.</p>
+        <p class="ta">விவரங்களுக்கு WhatsApp அல்லது Telegram-இல் தொடர்பு கொள்ளுங்கள்.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="https://wa.me/917904211337">WhatsApp Vijay · +91 79042 11337</a>
+        <a class="btn" href="https://wa.me/917397755102">WhatsApp Support · +91 73977 55102</a>
+        <a class="btn alt" href="https://t.me/Math_Thomas">Telegram · @Math_Thomas</a>
+        <a class="btn alt" href="mailto:thomasaaroon@gmail.com">Email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="risk.html">Risk &amp; Expectations</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+    <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
+    Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
+    <p class="disc">© 2026 Math by Thomas · India</p>
+  </div>
+</footer>
+<script>
+(function () {
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function fd(s) { if (!s) return "—"; var p = s.split("-"); return (+p[2]) + " " + MON[+p[1] - 1]; }
+  function fp(x) { if (x === null || x === undefined) return "—"; var v = Math.round(x); if (v === 0 && x !== 0) return (x > 0 ? "+" : "−") + Math.abs(x).toFixed(1); return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toLocaleString("en-IN"); }
+  function cls(x) { return x > 0 ? "pos" : x < 0 ? "neg" : ""; }
+  function $(id) { return document.getElementById(id); }
+  function set(id, html, c) { var e = $(id); if (e) { e.innerHTML = html; if (c !== undefined) e.className = (e.dataset.base || "") + " " + c; } }
+
+  function chart(days) {
+    var W = 720, H = 220, L = 52, R = 14, T = 14, B = 30;
+    if (!days.length) return "";
+    var ys = days.map(function (d) { return d.cum; }).concat([0]);
+    var lo = Math.min.apply(null, ys), hi = Math.max.apply(null, ys);
+    var step = Math.pow(10, Math.floor(Math.log10(Math.max(hi - lo, 1)))) / 2;
+    while ((hi - lo) / step > 6) step *= 2;
+    lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+    var n = days.length, x = function (i) { return L + (n === 1 ? 0 : i * (W - L - R) / (n - 1)); };
+    var y = function (v) { return T + (hi - v) * (H - T - B) / (hi - lo || 1); };
+    var g = "";
+    for (var v = lo; v <= hi + 1e-9; v += step) {
+      g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" class="' + (v === 0 ? "zero" : "grid") + '"/>' +
+        '<text x="' + (L - 8) + '" y="' + (y(v) + 4) + '" class="ax" text-anchor="end">' + fp(v).replace("+", "") + '</text>';
+    }
+    var pts = days.map(function (d, i) { return x(i) + "," + y(d.cum); }).join(" ");
+    var area = "M" + x(0) + "," + y(0) + " L" + pts.split(" ").join(" L") + " L" + x(n - 1) + "," + y(0) + " Z";
+    var lab = '<text x="' + x(0) + '" y="' + (H - 8) + '" class="ax">' + fd(days[0].date) + '</text>' +
+      '<text x="' + x(n - 1) + '" y="' + (H - 8) + '" class="ax" text-anchor="end">' + fd(days[n - 1].date) + '</text>';
+    var last = days[n - 1];
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Running total of points by day">' + g +
+      '<path d="' + area + '" class="area"/><polyline points="' + pts + '" class="line"/>' +
+      '<circle cx="' + x(n - 1) + '" cy="' + y(last.cum) + '" r="4.5" class="dot"/>' + lab + '</svg>';
+  }
+
+  function render(sb) {
+    var s = sb.summary;
+    set("sb-period", fd(sb.start) + " – " + fd(sb.last_day) + " 2026");
+    set("sb-updated", "Updated " + sb.updated);
+    set("sb-total", fp(s.total) + " <small>points</small>", cls(s.total));
+    set("sb-days", s.signal_days + " / " + s.trading_days);
+    set("sb-pf", s.signal_days === 0 ? "No trade" : s.loss_days === 0 ? "No loss" : s.pf.toFixed(1));
+    set("sb-wr", s.win_rate + "%");
+    set("sb-wr-n", "Win rate (" + s.signal_days + "-இல் " + s.profit_days + ")");
+    set("sb-dd", fp(s.max_dd), "neg");
+    set("sb-trades", s.trades);
+    var kv = $("sb-kv");
+    if (kv) kv.innerHTML =
+      '<tr><td>Trading days (market திறந்த நாட்கள்)</td><th>' + s.trading_days + '</th></tr>' +
+      '<tr><td>Signal கிடைத்த நாட்கள்</td><th>' + s.signal_days + '</th></tr>' +
+      '<tr><td>Signal இல்லாத நாட்கள்</td><th>' + s.no_signal_days + '</th></tr>' +
+      '<tr><td>லாபத்தில் முடிந்த நாட்கள்</td><th class="pos">' + s.profit_days + ' · ' + fp(s.profit_pts) + '</th></tr>' +
+      '<tr><td>நஷ்டத்தில் முடிந்த நாட்கள்</td><th class="neg">' + s.loss_days + ' · ' + fp(s.loss_pts) + '</th></tr>' +
+      '<tr><td>லாபமும் நஷ்டமும் இல்லாத நாள் (breakeven)</td><th>' + s.be_days + ' · 0</th></tr>' +
+      '<tr><td>Best day (அதிகபட்ச ஒரு நாள் லாபம்)</td><th class="pos">' + fp(s.best_day.pts) + ' (' + fd(s.best_day.date) + ')</th></tr>' +
+      '<tr><td>Worst day (அதிகபட்ச ஒரு நாள் நஷ்டம்)</td><th class="neg">' + fp(s.worst_day.pts) + ' (' + fd(s.worst_day.date) + ')</th></tr>' +
+      '<tr><td>Max drawdown (உச்சத்திலிருந்து அதிகபட்ச இறக்கம்)</td><th class="neg">' + fp(s.max_dd) + '</th></tr>' +
+      '<tr class="total"><td>ஒட்டுமொத்த முடிவு (points)</td><th class="' + cls(s.total) + '">' + fp(s.total) + '</th></tr>';
+    var st = $("sb-signals");
+    if (st) {
+      var h = "", T = { n: 0, p: 0, w: 0, b: 0, l: 0 };
+      sb.signals.forEach(function (g) {
+        T.n += g.trades; T.p += g.pts; T.w += g.win; T.b += g.be; T.l += g.loss;
+        h += '<tr><td>' + (g.experimental ? g.name + ' 🔬' : '<b>' + g.name + '</b>') + '</td><td class="n">' + g.trades +
+          '</td><th class="n ' + cls(g.pts) + '">' + (g.trades ? fp(g.pts) : "—") + '</th><td>' +
+          (g.trades ? g.win + ' win · ' + g.be + ' breakeven · ' + g.loss + ' loss' : 'no signal yet') + '</td></tr>';
+      });
+      h += '<tr><th>All four</th><th class="n">' + T.n + '</th><th class="n ' + cls(T.p) + '">' + fp(T.p) + '</th><th>' +
+        T.w + ' win · ' + T.b + ' breakeven · ' + T.l + ' loss</th></tr>';
+      st.innerHTML = h;
+    }
+    var cards = $("sb-cards");
+    if (cards) {
+      cards.innerHTML = sb.signals.map(function (g) {
+        return '<div class="ind"><p class="tag">' + (g.experimental ? "Experimental 🔬" : "Main signal") + '</p><h3>' + g.name + '</h3>' +
+          '<p class="pts ' + cls(g.pts) + '">' + (g.trades ? fp(g.pts) : "—") + '<small> points</small></p>' +
+          '<dl><div><dt>Trades</dt><dd>' + g.trades + '</dd></div><div><dt>Win · BE · Loss</dt><dd>' + g.win + ' · ' + g.be + ' · ' + g.loss +
+          '</dd></div><div><dt>Win rate</dt><dd>' + (g.win_rate === null ? "—" : g.win_rate + "%") + '</dd></div><div><dt>Profit factor</dt><dd>' +
+          (g.trades === 0 ? "No trade" : g.loss === 0 ? "No loss" : g.pf.toFixed(2)) + '</dd></div><div><dt>Best · Worst</dt><dd>' +
+          (g.trades ? fp(g.best) + ' · ' + fp(g.worst) : "—") + '</dd></div></dl></div>';
+      }).join("");
+    }
+    var ch = $("sb-chart"); if (ch) ch.innerHTML = chart(sb.days);
+    var dt = $("sb-daily");
+    if (dt) {
+      dt.innerHTML = sb.days.slice().reverse().map(function (d) {
+        var c = sb.signals.map(function (g) { var v = d.s[g.key]; return '<td class="n ' + cls(v) + '">' + (v === null ? "·" : fp(v)) + '</td>'; }).join("");
+        return '<tr><td>' + fd(d.date) + (d.manual ? ' †' : '') + '</td>' + c + '<th class="n ' + cls(d.total) + '">' + fp(d.total) +
+          '</th><td class="n ' + cls(d.cum) + '">' + fp(d.cum) + '</td></tr>';
+      }).join("");
+    }
+  }
+
+  function fallback() { try { return JSON.parse(document.getElementById("sb-fallback").textContent); } catch (e) { return null; } }
+  var fb = fallback(); if (fb) render(fb);
+  try {
+    fetch("scoreboard.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(render)
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
