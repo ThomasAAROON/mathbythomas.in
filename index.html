@@ -79,7 +79,7 @@ nav.main a.on{color:var(--bg);background:var(--gold);font-weight:600}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr);gap:30px;padding-block:36px 28px}}
 
 /* now rail */
-.now{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.now{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .now a{display:flex;flex-direction:column;gap:6px;padding:16px 18px;text-decoration:none;color:var(--cream);background:var(--surface);border-right:1px solid var(--line);min-width:0}
 .now a:last-child{border-right:0}
 .now a:hover{background:var(--raise)}
@@ -87,11 +87,13 @@ nav.main a.on{color:var(--bg);background:var(--gold);font-weight:600}
 .chip.live{border-color:var(--pos);color:var(--pos)}
 .now b{font-family:var(--f-display);font-size:17px;line-height:1.3}
 .now span{font-size:13.5px;color:var(--muted)}
-@media (max-width:860px){.now{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.now a:nth-child(2n){border-right:0}.now a:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:860px){.now{grid-template-columns:minmax(0,1fr)}.now a{border-right:0;border-bottom:1px solid var(--line)}.now a:last-child{border-bottom:0}}
 @media (max-width:480px){.now{grid-template-columns:minmax(0,1fr)}.now a{border-right:0;border-bottom:1px solid var(--line)}.now a:last-child{border-bottom:0}}
 .bf{margin-top:14px}
 .bf img{display:block;width:100%;max-width:728px;height:auto;border-radius:8px}
 @media (max-width:600px){.bf img{max-width:300px}}
+.bf.bf-small img{max-width:300px;margin:0 auto}
+.bf-note{display:block;text-align:center;font-size:12px;opacity:.7;margin-top:6px}
 
 /* sections */
 section{padding-block:56px 8px}
@@ -188,7 +190,7 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="logo.svg" width="38" height="38" alt=""><b>Math by Thomas</b></a>
-    <nav class="main"><a href="index.html" class="on">Home</a><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="#contact">Contact</a></nav>
+    <nav class="main"><a href="index.html" class="on">Home</a><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="policy.html">Sale Policy</a><a href="#contact">Contact</a></nav>
   </div>
 </header>
 
@@ -213,7 +215,6 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
   <div class="wrap">
     <div class="now">
       <a href="scoreboard.html"><span class="chip live">Live · daily</span><b>Scoreboard · <span id="sb-rail">—</span> points</b><span>Updated every trading day · losses included →</span></a>
-      <a href="course.html"><span class="chip">New</span><b>Pure Math Trading course</b><span>Live course · Batch 1 registration open →</span></a>
       <a href="#bundle"><span class="chip">Offer</span><b>4 indicators · ₹23,000</b><span>Bundle offer extended · lifetime access →</span></a>
       <a href="tradingview-offer.html"><span class="chip">Affiliate</span><b>TradingView Black Friday</b><span>Up to 80% off annual plans · 23 Nov – 2 Dec →</span></a>
     </div>
@@ -301,10 +302,9 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
         <ul style="margin-top:0">
           <li>All 4 TradingView indicators (invite-only) on one TradingView account</li>
           <li>5 Fingers live Telegram channel + future updates</li>
-          <li>Free <a href="course.html">Pure Math Trading course</a> with the bundle</li>
           <li><b>No refund</b> — please study the scorecards and the <a href="risk.html">risk page</a> before you buy</li>
         </ul>
-        <p class="ta" style="margin-top:10px">4 indicators ₹23,000 — TradingView-இன் புதிய விதிகள் அமலுக்கு வரும் வரை மட்டும். Bundle வாங்கியவர்களுக்கு Pure Math Trading course இலவசம்.</p>
+        <p class="ta" style="margin-top:10px">4 indicators ₹23,000 — TradingView-இன் புதிய விதிகள் அமலுக்கு வரும் வரை மட்டும்.</p>
       </div>
     </div>
   </section>
@@ -325,9 +325,10 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
   </section>
 </main>
 
+<div class="wrap tvbf-wrap"><p class="bf bf-small"><a href="https://www.tradingview.com/black-friday/?aff_id=152629&amp;utm_source=creative&amp;utm_lang=EN" target="_blank" rel="sponsored noopener"><img src="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/300x250InlineRectangle.jpg" srcset="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/300x250InlineRectangle.jpg 1x, https://s3.tradingview.com/pub/referrals/creatives/BF/EN/600x500InlineRectangle.jpg 2x" width="300" height="250" alt="TradingView Black Friday - up to 80% off (affiliate link)" loading="lazy"></a><span class="bf-note">Affiliate link · TradingView pays Math by Thomas a commission; your price does not change.</span></p></div>
 <footer>
   <div class="wrap">
-    <nav><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="course.html">Course</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="risk.html">Risk &amp; Expectations</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
+    <nav><a href="5-fingers.html">5 Fingers</a><a href="scoreboard.html">Scoreboard</a><a href="scorecards.html">Scorecards</a><a href="articles.html">Articles</a><a href="about.html">About</a><a href="risk.html">Risk &amp; Expectations</a><a href="policy.html">Sale Policy</a><a href="privacy.html">Privacy</a></nav>
     <p class="disc">Math by Thomas is not a SEBI-registered Investment Adviser or Research Analyst. All content and tools are for educational purposes only and are not investment advice. Past results do not guarantee future results. Trading involves risk of loss.<br>
     Math by Thomas SEBI பதிவு பெற்ற முதலீட்டு ஆலோசகர் / Research Analyst அல்ல. கல்வி நோக்கத்துக்கு மட்டுமே; முதலீட்டு ஆலோசனை அல்ல.</p>
     <p class="disc">© 2026 Math by Thomas · India</p>

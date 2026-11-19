@@ -63,3 +63,11 @@ details p{margin-top:8px;color:var(--cream);font-size:16px}
 footer .disc{margin-top:8px;font-size:13px;line-height:1.5}
 footer nav{display:flex;flex-wrap:wrap;gap:6px 14px}
 footer nav a{margin-right:0}
+
+/* TradingView Black Friday banner (affiliate) */
+.tvbf-wrap{margin-top:14px}
+.bf{margin:14px 0 0}
+.bf img{display:block;width:100%;max-width:728px;height:auto;border-radius:8px;margin:0 auto}
+@media (max-width:600px){.bf img{max-width:300px}}
+.bf.bf-small img{max-width:300px;margin:0 auto}
+.bf-note{display:block;text-align:center;font-size:12px;opacity:.7;margin-top:6px}
