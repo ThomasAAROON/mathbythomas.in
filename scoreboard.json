@@ -1,18 +1,18 @@
 {
  "start": "2026-10-07",
- "last_day": "2026-11-18",
- "updated": "2026-11-18 16:05 IST",
+ "last_day": "2026-11-19",
+ "updated": "2026-11-19 16:05 IST",
  "summary": {
-  "trading_days": 29,
-  "signal_days": 22,
+  "trading_days": 30,
+  "signal_days": 23,
   "no_signal_days": 7,
-  "profit_days": 11,
-  "profit_pts": 2871.2,
+  "profit_days": 12,
+  "profit_pts": 3077.2,
   "loss_days": 9,
   "loss_pts": -755.2,
   "be_days": 2,
-  "total": 2116.0,
-  "trades": 31,
+  "total": 2322.0,
+  "trades": 32,
   "best_day": {
    "date": "2026-10-15",
    "pts": 646.8
@@ -22,8 +22,8 @@
    "pts": -126.7
   },
   "max_dd": -273.7,
-  "pf": 3.8,
-  "win_rate": 50
+  "pf": 4.07,
+  "win_rate": 52
  },
  "signals": [
   {
@@ -43,7 +43,7 @@
   {
    "key": "PDHL",
    "name": "PDH / PDL break",
-   "experimental": true,
+   "experimental": false,
    "trades": 14,
    "win": 7,
    "be": 0,
@@ -58,13 +58,13 @@
    "key": "ORB30",
    "name": "ORB 30",
    "experimental": true,
-   "trades": 8,
-   "win": 5,
+   "trades": 9,
+   "win": 6,
    "be": 0,
    "loss": 3,
-   "pts": 583.0,
-   "pf": 3.41,
-   "win_rate": 62,
+   "pts": 789.0,
+   "pf": 4.26,
+   "win_rate": 67,
    "best": 285.2,
    "worst": -126.7
   },
@@ -347,6 +347,18 @@
    "total": 19.4,
    "cum": 2116.0,
    "manual": false
+  },
+  {
+   "date": "2026-11-19",
+   "s": {
+    "5F": null,
+    "PDHL": null,
+    "ORB30": 206.0,
+    "EU_RISKOFF": null
+   },
+   "total": 206.0,
+   "cum": 2322.0,
+   "manual": false
   }
  ],
  "trades": [
@@ -626,6 +638,15 @@
    "side": "SHORT",
    "status": "EXIT_1450",
    "pts": 29.6,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-19",
+   "tool": "ORB30",
+   "side": "LONG",
+   "status": "EXIT_1450",
+   "pts": 206.0,
    "manual": false,
    "note": ""
   }
