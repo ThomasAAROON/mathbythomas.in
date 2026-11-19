@@ -226,7 +226,7 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
   <section class="wrap">
     <div class="sec-head"><div><h2>Day by day</h2><p class="ta">புதிய நாள் மேலே · · = அன்று அந்த signal-இல் trade இல்லை · † = data பிழையால் live log-இல் வராத trade, கையால் சேர்க்கப்பட்டது</p></div></div>
     <div class="tablewrap"><table class="grid daily">
-      <thead><tr><th>Date</th><th class="n">5 Fingers</th><th class="n">PDH / PDL 🔬</th><th class="n">ORB 30 🔬</th><th class="n">Europe 🔬</th><th class="n">Day</th><th class="n">Running</th></tr></thead>
+      <thead><tr id="sb-dhead"><th>Date</th><th class="n">5 Fingers</th><th class="n">PDH / PDL</th><th class="n">ORB 30 🔬</th><th class="n">Day</th><th class="n">Running</th></tr></thead>
       <tbody id="sb-daily"></tbody>
     </table></div>
     <p class="note ta">Signal இல்லாத நாட்கள் இந்த அட்டவணையில் இல்லை. Points = Nifty points, brokerage / cost-க்கு முன். குறுகிய காலம் மட்டுமே — எந்த system-ஐயும் மதிப்பிட இது போதாது; இது எதிர்காலக் கணிப்பு அல்ல. வார விவரம்: <a href="scorecards.html">Scorecards</a> · ஆபத்துகள்: <a href="risk.html">Risk &amp; Expectations</a>.</p>
@@ -322,6 +322,11 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
       }).join("");
     }
     var ch = $("sb-chart"); if (ch) ch.innerHTML = chart(sb.days);
+    var dh = $("sb-dhead");
+    if (dh) {
+      dh.innerHTML = '<th>Date</th>' + sb.signals.map(function (g) { return '<th class="n">' + g.name + (g.experimental ? ' 🔬' : '') + '</th>'; }).join("") +
+        '<th class="n">Day</th><th class="n">Running</th>';
+    }
     var dt = $("sb-daily");
     if (dt) {
       dt.innerHTML = sb.days.slice().reverse().map(function (d) {
