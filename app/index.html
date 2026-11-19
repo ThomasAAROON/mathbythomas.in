@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MbT Signals · Math by Thomas</title>
+<meta name="description" content="Math by Thomas app — 5 Fingers, PDH / PDL, ORB 30 signals for buyers.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#22160e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MbT Signals">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#22160e;--card:#2e1f14;--raise:#3a281b;--line:#4a3524;--gold:#e8c880;--gold-d:#b88810;--cream:#faf4e8;--muted:#b8a68c;--green:#60d678;--red:#ff7a6b;
+--f:"Noto Sans Tamil","Noto Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--f);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+a{color:var(--gold)}
+.top{position:sticky;top:0;z-index:5;background:rgba(34,22,14,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+.top .in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.top img{width:34px;height:34px}
+.top b{font-size:17px;flex:1}
+.top button{font:inherit;font-size:13px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 10px}
+main{max-width:640px;margin:0 auto;padding:16px 16px calc(40px + env(safe-area-inset-bottom))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+h2{font-size:18px;margin:0 0 10px;color:var(--gold)}
+.muted{color:var(--muted);font-size:14px}
+label{display:block;font-size:14px;color:var(--muted);margin:10px 0 4px}
+input{width:100%;font:inherit;font-size:17px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--cream)}
+input:focus{outline:2px solid var(--gold-d);border-color:var(--gold-d)}
+.btn{display:block;width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:16px;padding:13px;border:0;border-radius:10px;background:var(--gold);color:#241811;cursor:pointer;text-align:center;text-decoration:none}
+.btn.alt{background:none;border:1px solid var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.6}
+.err{color:var(--red);font-size:14px;margin-top:10px;min-height:1em}
+.hello{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pill{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--muted)}
+.pill.on{color:var(--green);border-color:#2f6b3a}
+.msg{border-top:1px solid var(--line);padding:12px 0}
+.msg:first-child{border-top:0;padding-top:2px}
+.msg .t{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.msg .ta{white-space:pre-wrap;word-break:break-word;margin-top:4px}
+.msg .en{white-space:pre-wrap;word-break:break-word;margin-top:6px;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);text-align:center;padding:18px 0}
+ul.rules{margin:6px 0 0;padding-left:20px}
+ul.rules li{margin:4px 0}
+.hide{display:none!important}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <img src="logo.svg" alt="">
+  <b>Math by Thomas</b>
+  <button id="logout" class="hide" type="button">Logout</button>
+</div></div>
+
+<main>
+  <!-- LOGIN -->
+  <section id="login" class="card hide">
+    <h2>Buyers login</h2>
+    <p class="muted" style="margin:0">Live signals Bundle buyers-க்கு மட்டும். TradingView ID மற்றும் Thomas அனுப்பிய 6 இலக்க PIN-ஐப் போடுங்கள்.<br>Live signals are for Bundle buyers only.</p>
+    <form id="lf" autocomplete="on">
+      <label for="tv">TradingView ID</label>
+      <input id="tv" name="username" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+      <label for="pin">PIN (6 இலக்கம் / 6 digits)</label>
+      <input id="pin" name="password" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="current-password" required>
+      <button class="btn" id="lb" type="submit">Login</button>
+      <div class="err" id="lerr"></div>
+    </form>
+  </section>
+
+  <!-- SIGNED IN -->
+  <section id="home" class="hide">
+    <div class="card">
+      <div class="hello"><h2 id="hi" style="margin:0">வணக்கம்</h2><span class="pill" id="np">🔔 OFF</span></div>
+      <button class="btn" id="nb" type="button">🔔 Notification ON</button>
+      <p class="muted" id="nhint" style="margin:10px 0 0">Signal வந்ததும் phone-க்கு notification வர இதை அழுத்துங்கள்.<br>Tap to get a phone notification when a signal comes.</p>
+    </div>
+    <div class="card">
+      <div class="hello"><h2 style="margin:0">இன்றைய செய்திகள் · Today</h2><span class="pill" id="fd">—</span></div>
+      <div id="feed" style="margin-top:10px"><div class="empty">ஏற்றுகிறது… Loading…</div></div>
+      <p class="muted" style="margin:8px 0 0">தானாக ஒவ்வொரு 30 வினாடியும் புதுப்பிக்கும் · Auto-refresh every 30 s · <a href="#" id="rf">Refresh</a></p>
+    </div>
+  </section>
+
+  <!-- PUBLIC -->
+  <section class="card">
+    <h2>Trade rules · விதிகள்</h2>
+    <ul class="rules">
+      <li>Signal-ல் வரும் Entry, Stop loss-ஐ மட்டும் பின்பற்றுங்கள்.</li>
+      <li><b>5 Fingers:</b> +30 points நகர்ந்ததும் Stop-ஐ entry-க்கு (breakeven) மாற்றுங்கள்.</li>
+      <li>PDH / PDL, ORB 30: breakeven இல்லை.</li>
+      <li>எல்லா trade-களும் <b>14:50</b>-க்கு exit.</li>
+      <li>Position size உங்கள் முடிவு. இழக்கக்கூடிய பணத்தை மட்டும் பயன்படுத்துங்கள்.</li>
+    </ul>
+    <a class="btn alt" href="/scoreboard.html">Daily scoreboard — losses included</a>
+  </section>
+
+  <section class="card" id="install">
+    <h2>Phone-ல் app ஆக வைக்க</h2>
+    <p class="muted" style="margin:0"><b>Android (Chrome):</b> ⋮ menu → <b>Add to Home screen</b> / <b>Install app</b>.<br>
+    <b>iPhone (Safari):</b> Share ⬆️ → <b>Add to Home Screen</b>. iPhone-ல் notification வர இது கட்டாயம்; பிறகு Home screen icon-லிருந்து திறந்து login செய்யுங்கள்.</p>
+  </section>
+
+  <section class="card">
+    <h2>தொடர்பு · Contact</h2>
+    <p style="margin:0">WhatsApp Thomas: <a href="https://wa.me/917397755102">+91 73977 55102</a><br>Telegram: <a href="https://t.me/Math_Thomas">@Math_Thomas</a></p>
+  </section>
+
+  <p class="foot">கல்வி நோக்கம் மட்டும் · SEBI பதிவு பெற்றவர் அல்ல · முதலீட்டு ஆலோசனை அல்ல.<br>Educational only · Not SEBI-registered · Not investment advice · Past results do not guarantee future results.</p>
+</main>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+(function () {
+  var API = "https://api.mathbythomas.in";
+  var APP_ID = "23af915d-9370-4d8c-9d11-02e0b5db7f47";
+  var $ = function (id) { return document.getElementById(id); };
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  // ---------- OneSignal (push) ----------
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  var OS = null;
+  OneSignalDeferred.push(async function (OneSignal) {
+    try {
+      await OneSignal.init({ appId: APP_ID, serviceWorkerParam: { scope: "/" }, notifyButton: { enable: false } });
+      OS = OneSignal;
+      OneSignal.Notifications.addEventListener("permissionChange", showPush);
+      var tv = get("mbt_tv");
+      if (tv && get("mbt_token")) await OneSignal.login(tv);
+    } catch (e) { console.log("OneSignal", e); }
+    showPush();
+  });
+  function showPush() {
+    var on = false;
+    try { on = !!(OS && OS.Notifications.permission && OS.User.PushSubscription.optedIn); } catch (e) {}
+    $("np").textContent = on ? "🔔 ON" : "🔔 OFF";
+    $("np").className = "pill" + (on ? " on" : "");
+    $("nb").classList.toggle("hide", on);
+    $("nhint").textContent = on ? "Signal வந்ததும் இந்த phone-க்கு notification வரும். · Notifications are on for this phone."
+      : "Signal வந்ததும் phone-க்கு notification வர மேலே உள்ள பொத்தானை அழுத்துங்கள். · Tap the button to get notifications.";
+  }
+  $("nb").addEventListener("click", async function () {
+    if (!OS) { alertMsg("சிறிது நேரம் கழித்து மீண்டும் அழுத்துங்கள். Please try again in a moment."); return; }
+    try {
+      await OS.login(get("mbt_tv"));
+      await OS.Notifications.requestPermission();
+      if (OS.Notifications.permission) await OS.User.PushSubscription.optIn();
+    } catch (e) { console.log(e); }
+    showPush();
+    if (!OS.Notifications.permission) {
+      alertMsg(/iPhone|iPad/.test(navigator.userAgent) && !navigator.standalone
+        ? "iPhone: முதலில் Share → Add to Home Screen செய்து, Home screen icon-லிருந்து திறந்து இதை அழுத்துங்கள்."
+        : "Notification அனுமதி மறுக்கப்பட்டது. Browser settings → Site settings → Notifications → Allow.");
+    }
+  });
+  function alertMsg(t) { $("nhint").textContent = t; }
+
+  // ---------- login ----------
+  function view() {
+    var ok = !!get("mbt_token");
+    $("login").classList.toggle("hide", ok);
+    $("home").classList.toggle("hide", !ok);
+    $("logout").classList.toggle("hide", !ok);
+    if (ok) { $("hi").textContent = "வணக்கம், " + (get("mbt_name") || ""); load(); }
+  }
+  $("lf").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    $("lerr").textContent = ""; $("lb").disabled = true;
+    try {
+      var r = await fetch(API + "/login", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tv: $("tv").value.trim(), pin: $("pin").value.trim() }) });
+      var d = await r.json();
+      if (d.ok) {
+        set("mbt_token", d.token); set("mbt_tv", d.tv); set("mbt_name", d.name);
+        $("pin").value = "";
+        if (OS) { try { await OS.login(d.tv); } catch (x) {} }
+        view(); showPush();
+      } else {
+        $("lerr").textContent = d.error === "locked" ? "பல முறை தவறு. 30 நிமிடம் கழித்து முயற்சிக்கவும். · Too many tries, wait 30 minutes."
+          : d.error === "no_access" ? "உங்களுக்கு app access இல்லை. Thomas-ஐ WhatsApp-ல் தொடர்பு கொள்ளுங்கள். · No access — please WhatsApp Thomas."
+          : "TradingView ID அல்லது PIN தவறு. · Wrong TradingView ID or PIN.";
+      }
+    } catch (x) { $("lerr").textContent = "Server-ஐ அடைய முடியவில்லை. Internet-ஐச் சரிபாருங்கள். · Cannot reach server."; }
+    $("lb").disabled = false;
+  });
+  $("logout").addEventListener("click", async function () {
+    set("mbt_token", null); set("mbt_tv", null); set("mbt_name", null);
+    if (OS) { try { await OS.logout(); } catch (x) {} }
+    view();
+  });
+
+  // ---------- feed ----------
+  async function load() {
+    var tok = get("mbt_token"); if (!tok) return;
+    try {
+      var r = await fetch(API + "/feed", { headers: { "Authorization": "Bearer " + tok }, cache: "no-store" });
+      if (r.status === 401 || r.status === 403) {
+        set("mbt_token", null);
+        view();
+        $("lerr").textContent = r.status === 403 ? "உங்களுக்கு app access இல்லை. Thomas-ஐ WhatsApp-ல் தொடர்பு கொள்ளுங்கள். · No access — please WhatsApp Thomas."
+          : "மீண்டும் login செய்யுங்கள். · Please log in again.";
+        return;
+      }
+      var d = await r.json();
+      $("fd").textContent = d.date || "—";
+      var m = (d.messages || []).slice().reverse();
+      $("feed").innerHTML = m.length ? m.map(function (x) {
+        return '<div class="msg"><div class="t">' + esc(x.time) + '</div><div class="ta">' + esc(x.text) + "</div>" +
+          (x.en ? '<div class="en">' + esc(x.en) + "</div>" : "") + "</div>";
+      }).join("") : '<div class="empty">இன்னும் செய்தி இல்லை. · No messages yet.</div>';
+    } catch (x) {
+      $("feed").innerHTML = '<div class="empty">Server-ஐ அடைய முடியவில்லை. · Cannot reach server.</div>';
+    }
+  }
+  $("rf").addEventListener("click", function (e) { e.preventDefault(); load(); });
+  setInterval(function () { if (!document.hidden) load(); }, 30000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) load(); });
+
+  view();
+})();
+</script>
+</body>
+</html>
