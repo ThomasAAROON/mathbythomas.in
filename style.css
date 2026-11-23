@@ -83,3 +83,13 @@ footer nav a{margin-right:0}
 .book .tag{color:var(--gold);font-size:13px;margin:0}
 .book .sub{color:#e8c880;margin-top:0}
 @media (max-width:640px){.book{flex-direction:column}.book .cover{flex:0 0 auto;width:180px;margin:0 auto}}
+
+.bf-promo{margin:12px 0 0}
+.bf-promo a{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;padding:12px 16px;border-radius:10px;background:linear-gradient(90deg,#1b1f2e,#2a1d10);border:2px solid #f5a623;color:#fff;text-decoration:none;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.bf-promo .bf-p1{font-weight:700;color:#f5a623;font-size:17px}
+.bf-promo .bf-p2{font-size:15px}
+.bf-promo .bf-p2 b{color:#ffd166}
+.bf-promo .bf-p3{flex-basis:100%;font-size:13px;opacity:.9}
+.bf-promo .bf-btn{background:#f5a623;color:#1b1f2e;font-weight:700;padding:6px 14px;border-radius:20px;font-size:14px}
+.bf-promo a:hover .bf-btn{background:#ffd166}
+@media (max-width:600px){.bf-promo .bf-p1{font-size:15px}.bf-promo .bf-p2{font-size:13px}}

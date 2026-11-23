@@ -15,6 +15,16 @@
 </head>
 <body>
 <style>
+.bf-promo{margin:12px 0 0}
+.bf-promo a{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;padding:12px 16px;border-radius:10px;background:linear-gradient(90deg,#1b1f2e,#2a1d10);border:2px solid #f5a623;color:#fff;text-decoration:none;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.bf-promo .bf-p1{font-weight:700;color:#f5a623;font-size:17px}
+.bf-promo .bf-p2{font-size:15px}
+.bf-promo .bf-p2 b{color:#ffd166}
+.bf-promo .bf-p3{flex-basis:100%;font-size:13px;opacity:.9}
+.bf-promo .bf-btn{background:#f5a623;color:#1b1f2e;font-weight:700;padding:6px 14px;border-radius:20px;font-size:14px}
+.bf-promo a:hover .bf-btn{background:#ffd166}
+@media (max-width:600px){.bf-promo .bf-p1{font-size:15px}.bf-promo .bf-p2{font-size:13px}}
+
 /* Layout: sticky slim header · two-column hero (thesis left, live Market Profile right) · "now" rail · record ledger · product + bundle · contact */
 :root{
   --bg:#1a120b; --surface:#251a11; --raise:#302217; --line:#46331f;
@@ -216,9 +226,10 @@ table.daily td.n,table.daily th.n{font-family:var(--f-num);font-variant-numeric:
     <div class="now">
       <a href="scoreboard.html"><span class="chip live">Live · daily</span><b>Scoreboard · <span id="sb-rail">—</span> points</b><span>Updated every trading day · losses included →</span></a>
       <a href="#bundle"><span class="chip">Offer</span><b>5 Fingers · ₹23,000</b><span>+ 3 indicators free · lifetime access →</span></a>
-      <a href="tradingview-offer.html"><span class="chip">Affiliate</span><b>TradingView Black Friday</b><span>Up to 80% off annual plans · 23 Nov – 2 Dec →</span></a>
+      <a href="tradingview-offer.html"><span class="chip">Affiliate</span><b>TradingView Black Friday</b><span>Up to 80% off · +1 month free · $15 coupon · till 2 Dec →</span></a>
     </div>
     <p class="bf"><a href="https://www.tradingview.com/black-friday/?aff_id=152629&amp;utm_source=creative&amp;utm_lang=EN" target="_blank" rel="sponsored noopener"><picture><source media="(max-width:600px)" srcset="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/300x250InlineRectangle.jpg 1x, https://s3.tradingview.com/pub/referrals/creatives/BF/EN/600x500InlineRectangle.jpg 2x" width="300" height="250"><img src="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/728x90Leaderboard.jpg" srcset="https://s3.tradingview.com/pub/referrals/creatives/BF/EN/728x90Leaderboard.jpg 1x, https://s3.tradingview.com/pub/referrals/creatives/BF/EN/1456x180Leaderboard.jpg 2x" width="728" height="90" alt="TradingView Black Friday - up to 80% off (affiliate link)" loading="lazy"></picture></a></p>
+    <div class="bf-promo"><a href="https://www.tradingview.com/black-friday/?aff_id=152629&amp;utm_source=website_strip" target="_blank" rel="sponsored noopener"><span class="bf-p1">🔥 TradingView Black Friday</span><span class="bf-p2">Up to <b>80% off</b> annual plans · <b>+1 month free</b> · <b>$15 coupon</b> via our link</span><span class="bf-p3 ta">80% வரை தள்ளுபடி · 1 மாதம் இலவசம் · நம் link மூலம் $15 coupon · 2-Dec மதியம் 1:30 வரை</span><span class="bf-btn">Grab the offer →</span></a></div>
   </div>
 
   <section class="wrap">
