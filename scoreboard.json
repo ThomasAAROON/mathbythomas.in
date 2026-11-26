@@ -1,29 +1,29 @@
 {
  "start": "2026-10-07",
- "last_day": "2026-11-25",
- "updated": "2026-11-25 16:05 IST",
+ "last_day": "2026-11-26",
+ "updated": "2026-11-26 16:05 IST",
  "summary": {
-  "trading_days": 33,
-  "signal_days": 26,
+  "trading_days": 34,
+  "signal_days": 27,
   "no_signal_days": 7,
   "profit_days": 14,
   "profit_pts": 3766.2,
-  "loss_days": 10,
-  "loss_pts": -806.0,
+  "loss_days": 11,
+  "loss_pts": -951.4,
   "be_days": 2,
-  "total": 2960.2,
-  "trades": 37,
+  "total": 2814.8,
+  "trades": 38,
   "best_day": {
    "date": "2026-10-15",
    "pts": 646.8
   },
   "worst_day": {
-   "date": "2026-11-09",
-   "pts": -126.7
+   "date": "2026-11-26",
+   "pts": -145.4
   },
   "max_dd": -273.7,
-  "pf": 4.67,
-  "win_rate": 54
+  "pf": 3.96,
+  "win_rate": 52
  },
  "signals": [
   {
@@ -58,15 +58,29 @@
    "key": "ORB30",
    "name": "ORB 30",
    "experimental": true,
-   "trades": 12,
+   "trades": 13,
    "win": 8,
    "be": 0,
-   "loss": 4,
-   "pts": 1142.2,
-   "pf": 4.9,
-   "win_rate": 67,
+   "loss": 5,
+   "pts": 996.8,
+   "pf": 3.27,
+   "win_rate": 62,
    "best": 285.2,
-   "worst": -126.7
+   "worst": -145.4
+  },
+  {
+   "key": "ORB35",
+   "name": "ORB 35",
+   "experimental": false,
+   "trades": 0,
+   "win": 0,
+   "be": 0,
+   "loss": 0,
+   "pts": 0.0,
+   "pf": null,
+   "win_rate": null,
+   "best": null,
+   "worst": null
   }
  ],
  "days": [
@@ -75,7 +89,8 @@
    "s": {
     "5F": 0.0,
     "PDHL": null,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 0.0,
    "cum": 0.0,
@@ -86,7 +101,8 @@
    "s": {
     "5F": 315.7,
     "PDHL": null,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 315.7,
    "cum": 315.7,
@@ -97,7 +113,8 @@
    "s": {
     "5F": 235.4,
     "PDHL": null,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 235.4,
    "cum": 551.1,
@@ -108,7 +125,8 @@
    "s": {
     "5F": 244.6,
     "PDHL": null,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 244.6,
    "cum": 795.7,
@@ -119,7 +137,8 @@
    "s": {
     "5F": null,
     "PDHL": -88.0,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -88.0,
    "cum": 707.7,
@@ -130,7 +149,8 @@
    "s": {
     "5F": 245.3,
     "PDHL": 212.2,
-    "ORB30": 189.3
+    "ORB30": 189.3,
+    "ORB35": null
    },
    "total": 646.8,
    "cum": 1354.5,
@@ -141,7 +161,8 @@
    "s": {
     "5F": null,
     "PDHL": null,
-    "ORB30": 107.1
+    "ORB30": 107.1,
+    "ORB35": null
    },
    "total": 107.1,
    "cum": 1461.6,
@@ -152,7 +173,8 @@
    "s": {
     "5F": 0.0,
     "PDHL": 181.7,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 181.7,
    "cum": 1643.3,
@@ -163,7 +185,8 @@
    "s": {
     "5F": 0.0,
     "PDHL": -95.3,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -95.3,
    "cum": 1547.9,
@@ -174,7 +197,8 @@
    "s": {
     "5F": null,
     "PDHL": 58.8,
-    "ORB30": 168.0
+    "ORB30": 168.0,
+    "ORB35": null
    },
    "total": 226.8,
    "cum": 1774.8,
@@ -185,7 +209,8 @@
    "s": {
     "5F": 0.0,
     "PDHL": null,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 0.0,
    "cum": 1774.8,
@@ -196,7 +221,8 @@
    "s": {
     "5F": null,
     "PDHL": -0.3,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -0.3,
    "cum": 1774.5,
@@ -207,7 +233,8 @@
    "s": {
     "5F": null,
     "PDHL": -98.3,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -98.3,
    "cum": 1676.1,
@@ -218,7 +245,8 @@
    "s": {
     "5F": 0.0,
     "PDHL": 158.8,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": 158.8,
    "cum": 1834.9,
@@ -229,7 +257,8 @@
    "s": {
     "5F": null,
     "PDHL": null,
-    "ORB30": -105.2
+    "ORB30": -105.2,
+    "ORB35": null
    },
    "total": -105.2,
    "cum": 1729.7,
@@ -240,7 +269,8 @@
    "s": {
     "5F": null,
     "PDHL": -94.4,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -94.4,
    "cum": 1635.3,
@@ -251,7 +281,8 @@
    "s": {
     "5F": null,
     "PDHL": 287.3,
-    "ORB30": 285.2
+    "ORB30": 285.2,
+    "ORB35": null
    },
    "total": 572.5,
    "cum": 2207.9,
@@ -262,7 +293,8 @@
    "s": {
     "5F": null,
     "PDHL": null,
-    "ORB30": -126.7
+    "ORB30": -126.7,
+    "ORB35": null
    },
    "total": -126.7,
    "cum": 2081.2,
@@ -273,7 +305,8 @@
    "s": {
     "5F": null,
     "PDHL": -105.2,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -105.2,
    "cum": 1976.0,
@@ -284,7 +317,8 @@
    "s": {
     "5F": null,
     "PDHL": -41.8,
-    "ORB30": null
+    "ORB30": null,
+    "ORB35": null
    },
    "total": -41.8,
    "cum": 1934.2,
@@ -295,7 +329,8 @@
    "s": {
     "5F": null,
     "PDHL": 87.0,
-    "ORB30": 75.4
+    "ORB30": 75.4,
+    "ORB35": null
    },
    "total": 162.4,
    "cum": 2096.6,
@@ -306,7 +341,8 @@
    "s": {
     "5F": null,
     "PDHL": 29.6,
-    "ORB30": -10.2
+    "ORB30": -10.2,
+    "ORB35": null
    },
    "total": 19.4,
    "cum": 2116.0,
@@ -317,7 +353,8 @@
    "s": {
     "5F": null,
     "PDHL": null,
-    "ORB30": 206.0
+    "ORB30": 206.0,
+    "ORB35": null
    },
    "total": 206.0,
    "cum": 2322.0,
@@ -328,7 +365,8 @@
    "s": {
     "5F": 285.0,
     "PDHL": null,
-    "ORB30": 240.8
+    "ORB30": 240.8,
+    "ORB35": null
    },
    "total": 525.8,
    "cum": 2847.8,
@@ -339,7 +377,8 @@
    "s": {
     "5F": null,
     "PDHL": null,
-    "ORB30": 163.2
+    "ORB30": 163.2,
+    "ORB35": null
    },
    "total": 163.2,
    "cum": 3011.0,
@@ -350,10 +389,23 @@
    "s": {
     "5F": 0.0,
     "PDHL": null,
-    "ORB30": -50.8
+    "ORB30": -50.8,
+    "ORB35": null
    },
    "total": -50.8,
    "cum": 2960.2,
+   "manual": false
+  },
+  {
+   "date": "2026-11-26",
+   "s": {
+    "5F": null,
+    "PDHL": null,
+    "ORB30": -145.4,
+    "ORB35": null
+   },
+   "total": -145.4,
+   "cum": 2814.8,
    "manual": false
   }
  ],
@@ -688,6 +740,15 @@
    "side": "LONG",
    "status": "EXIT_1450",
    "pts": -50.8,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-26",
+   "tool": "ORB30",
+   "side": "SHORT",
+   "status": "SL",
+   "pts": -145.4,
    "manual": false,
    "note": ""
   }
