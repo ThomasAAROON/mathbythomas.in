@@ -1,18 +1,18 @@
 {
  "start": "2026-10-07",
- "last_day": "2026-11-26",
- "updated": "2026-11-26 16:05 IST",
+ "last_day": "2026-11-27",
+ "updated": "2026-11-27 16:05 IST",
  "summary": {
-  "trading_days": 34,
-  "signal_days": 27,
+  "trading_days": 35,
+  "signal_days": 28,
   "no_signal_days": 7,
-  "profit_days": 14,
-  "profit_pts": 3766.2,
+  "profit_days": 15,
+  "profit_pts": 3941.2,
   "loss_days": 11,
   "loss_pts": -951.4,
   "be_days": 2,
-  "total": 2814.8,
-  "trades": 38,
+  "total": 2989.8,
+  "trades": 40,
   "best_day": {
    "date": "2026-10-15",
    "pts": 646.8
@@ -22,21 +22,21 @@
    "pts": -145.4
   },
   "max_dd": -273.7,
-  "pf": 3.96,
-  "win_rate": 52
+  "pf": 4.14,
+  "win_rate": 54
  },
  "signals": [
   {
    "key": "5F",
    "name": "5 Fingers",
    "experimental": false,
-   "trades": 11,
+   "trades": 12,
    "win": 5,
-   "be": 6,
+   "be": 7,
    "loss": 0,
    "pts": 1326.0,
    "pf": null,
-   "win_rate": 45,
+   "win_rate": 42,
    "best": 315.7,
    "worst": 0.0
   },
@@ -72,15 +72,15 @@
    "key": "ORB35",
    "name": "ORB 35",
    "experimental": false,
-   "trades": 0,
-   "win": 0,
+   "trades": 1,
+   "win": 1,
    "be": 0,
    "loss": 0,
-   "pts": 0.0,
+   "pts": 175.0,
    "pf": null,
-   "win_rate": null,
-   "best": null,
-   "worst": null
+   "win_rate": 100,
+   "best": 175.0,
+   "worst": 175.0
   }
  ],
  "days": [
@@ -406,6 +406,18 @@
    },
    "total": -145.4,
    "cum": 2814.8,
+   "manual": false
+  },
+  {
+   "date": "2026-11-27",
+   "s": {
+    "5F": 0.0,
+    "PDHL": null,
+    "ORB30": null,
+    "ORB35": 175.0
+   },
+   "total": 175.0,
+   "cum": 2989.8,
    "manual": false
   }
  ],
@@ -749,6 +761,24 @@
    "side": "SHORT",
    "status": "SL",
    "pts": -145.4,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-27",
+   "tool": "5F",
+   "side": "LONG",
+   "status": "BE",
+   "pts": 0.0,
+   "manual": false,
+   "note": ""
+  },
+  {
+   "date": "2026-11-27",
+   "tool": "ORB35",
+   "side": "SHORT",
+   "status": "EXIT_1450",
+   "pts": 175.0,
    "manual": false,
    "note": ""
   }
